@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>element 日期选择器</title>
+    <link href="/2023/04/07/element%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8/"/>
+    <url>/2023/04/07/element%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="日期范围选择器"><a href="#日期范围选择器" class="headerlink" title="日期范围选择器"></a>日期范围选择器</h2><p>日期范围选择器限制只选择今天及以前的日期。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;el-date-picker <br>    style=&quot;margin-left: 5px;&quot; <br>    v-model=&quot;valueTime&quot; <br>    type=&quot;daterange&quot; <br>    format=&quot;yyyy-MM-dd&quot; <br>    unlink-panels<br>    value-format=&quot;yyyy-MM-dd&quot;<br>    range-separator=&quot;至&quot;<br>    start-placeholder=&quot;开始日期&quot;<br>    end-placeholder=&quot;结束日期&quot;<br>    :picker-options=&quot;pickerOptions&quot;&gt;<br>&lt;/el-date-picker&gt;<br></code></pre></td></tr></table></figure><ul><li><code>unlink-panels</code>: 在范围选择器里取消两个日期面板之间的联动。</li></ul><p>在组件中需进行如下设置。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script&gt;<br>    valueTime: &quot;&quot;,<br>    pickerOptions: &#123;<br>        disabledDate (time) &#123;<br>            return time.getTime() &gt; Date.now();<br>        &#125;<br>    &#125;,<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure><p>实际效果如下：</p><p><img src="/../image/element%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8_1.1.png" alt="element日期选择器1"></p><p><img src="/../image/element%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8_1.2.png" alt="element日期选择器2"></p><h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>其他几种常见日期设置。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;script&gt;<br>    pickerOptions: &#123;<br>        disabledDate(time) &#123;<br>            // 设置选择今天以及今天之后的日期<br>            return time.getTime() &lt; Date.now() - 8.64e7<br>            // 设置选择今天以及今天以前的日期<br>            return time.getTime() &gt; Date.now();<br>            // 设置选择今天之后的日期（不能选择当天时间）<br>            return time.getTime() &lt; Date.now();        <br>            // 设置选择今天之前的日期（不能选择当天）<br>            return time.getTime() &gt; Date.now() - 8.64e7 <br>            // 设置当天23：59：59可选<br>            let currentTime = this.getNowMonthDay() + ` 23:59:59`<br>                return time.getTime() &gt; new Date(currentTime).getTime()<br>        &#125;<br>    &#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://element.eleme.cn/2.0/#/zh-CN/component/date-picker">https://element.eleme.cn/2.0/#/zh-CN/component/date-picker</a></p><p><a href="https://segmentfault.com/q/1010000037421298">https://segmentfault.com/q/1010000037421298</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>element</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>测试文章</title>
     <link href="/2023/04/07/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2023/04/07/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
