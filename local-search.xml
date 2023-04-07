@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>前端未响应</title>
+    <link href="/2023/04/07/%E5%89%8D%E7%AB%AF%E6%9C%AA%E5%93%8D%E5%BA%94/"/>
+    <url>/2023/04/07/%E5%89%8D%E7%AB%AF%E6%9C%AA%E5%93%8D%E5%BA%94/</url>
+    
+    <content type="html"><![CDATA[<h2 id="前端未响应"><a href="#前端未响应" class="headerlink" title="前端未响应"></a>前端未响应</h2><p>前端未响应，显示连接不上 <code>localhost:8092</code> (自己的端口号)，可以尝试使用以下命令解决：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsof -i:8092    // 查看占用的 pid，比如查出来是 1221<br><span class="hljs-built_in">kill</span> 1221<br>ctrl+<span class="hljs-built_in">shift</span>+p    // 输入 reloadwindow  重新加载vscode<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>vue</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>element 日期选择器</title>
     <link href="/2023/04/07/element%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8/"/>
     <url>/2023/04/07/element%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8/</url>
