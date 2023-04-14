@@ -18,7 +18,7 @@
   
     <meta name="description" content="对象引用和复制对象与原始类型的根本区别之一是，对象是“通过引用”存储和复制的，而原始类型：字符串、数字、布尔值等是“作为一个整体复制”。  原始类型复制值  12let message &#x3D; &quot;hello&quot;let phrase &#x3D; message    &#x2F;&#x2F; 两个独立变量，每个中都存储着字符串 &quot;hello&quot;    对象复制值  123let user &#x3D; &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对象">
+<meta property="og:title" content="JSON Object 对象 &lt;二&gt;">
 <meta property="og:url" content="http://example.com/2023/04/13/JSON%20Object%20%E5%AF%B9%E8%B1%A1(2)/index.html">
 <meta property="og:site_name" content="我与我斗争">
 <meta property="og:description" content="对象引用和复制对象与原始类型的根本区别之一是，对象是“通过引用”存储和复制的，而原始类型：字符串、数字、布尔值等是“作为一个整体复制”。  原始类型复制值  12let message &#x3D; &quot;hello&quot;let phrase &#x3D; message    &#x2F;&#x2F; 两个独立变量，每个中都存储着字符串 &quot;hello&quot;    对象复制值  123let user &#x3D; &amp;">
@@ -27,17 +27,15 @@
 <meta property="og:image" content="http://example.com/image/%E9%94%AE%E5%80%BC%E5%AF%B9%E6%AF%94%E5%96%BB%E5%9B%BE8.png">
 <meta property="og:image" content="http://example.com/image/%E9%94%AE%E5%80%BC%E5%AF%B9%E6%AF%94%E5%96%BB%E5%9B%BE9.png">
 <meta property="article:published_time" content="2023-04-13T11:22:54.000Z">
-<meta property="article:modified_time" content="2023-04-13T14:51:30.231Z">
+<meta property="article:modified_time" content="2023-04-14T01:47:37.074Z">
 <meta property="article:author" content="GeorgyKwe">
 <meta property="article:tag" content="学习">
-<meta property="article:tag" content="[object Object]">
-<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image/%E9%94%AE%E5%80%BC%E5%AF%B9%E6%AF%94%E5%96%BB%E5%9B%BE7.png">
   
   
   
-  <title>对象 - 我与我斗争</title>
+  <title>JSON Object 对象 &lt;二&gt; - 我与我斗争</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="对象"></span>
+            <span id="subtitle" data-typed-text="JSON Object 对象 &lt;二&gt;"></span>
           
         </div>
 
@@ -226,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          3.2k 字
         
       </span>
     
@@ -237,7 +235,7 @@
         
         
         
-          19 分钟
+          27 分钟
         
       </span>
     
@@ -275,7 +273,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">对象</h1>
+            <h1 style="display: none">JSON Object 对象 &lt;二&gt;</h1>
             
             
               <div class="markdown-body">
@@ -332,6 +330,18 @@
 <p>也可使用 <code>Object.assign</code> 代替 <code>for..in</code> 循环来进行简单克隆。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> user = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-number">30</span><br>&#125;;<br><br><span class="hljs-keyword">let</span> clone = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(&#123;&#125;, user);<br><span class="hljs-comment">// 将 user 中的所有属性拷贝到了一个空对象中，并返回这个新的对象。</span><br></code></pre></td></tr></table></figure>
 
+<h2 id="深层克隆"><a href="#深层克隆" class="headerlink" title="深层克隆"></a>深层克隆</h2><p>上述例子中，均假设 <code>user</code> 的所有属性均为原始类型，但属性也可以是对其他对象的引用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> user = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">30</span><br>&#125;;<br>------------------------------------------<br><span class="hljs-keyword">let</span> user = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,<br>    <span class="hljs-attr">sizes</span>: &#123;            <span class="hljs-comment">// 对其他对象的引用</span><br>        <span class="hljs-attr">height</span>: <span class="hljs-number">182</span>,<br>        <span class="hljs-attr">width</span>: <span class="hljs-number">50</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> user = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,<br>    <span class="hljs-attr">sizes</span>: &#123;            <span class="hljs-comment">// 对其他对象的引用</span><br>        <span class="hljs-attr">height</span>: <span class="hljs-number">182</span>,<br>        <span class="hljs-attr">width</span>: <span class="hljs-number">50</span><br>    &#125;<br>&#125;;<br><span class="hljs-title function_">alert</span>( user.<span class="hljs-property">sizes</span>.<span class="hljs-property">height</span> ); <span class="hljs-comment">// 182</span><br><br><span class="hljs-keyword">let</span> clone = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">assign</span>(&#123;&#125;, user);<br><span class="hljs-title function_">alert</span>( user.<span class="hljs-property">sizes</span> === clone.<span class="hljs-property">sizes</span> );    <span class="hljs-comment">// true,同为一个对象</span><br><br><span class="hljs-comment">// user 和 clone 分享同一个 sizes</span><br>user.<span class="hljs-property">sizes</span>.<span class="hljs-property">width</span>++;         <span class="hljs-comment">// 通过 user 改变属性值</span><br><span class="hljs-title function_">alert</span>(clone.<span class="hljs-property">sizes</span>.<span class="hljs-property">width</span>);   <span class="hljs-comment">// 51,能从clone中获取到变更后的结果</span><br></code></pre></td></tr></table></figure>
+
+<p>深拷贝：为使 <code>user</code> 和 <code>clone</code> 成为两个真正独立的对象，可使用一个拷贝循环来检查 <code>user[key]</code> 的每个值，如果 <code>user[key]</code> 是一个对象，也复制其结构。</p>
+<p>可使用递归来实现，或采用现有的实现，例如 <code>lodash</code> 库的 <code>_.cloneDeep(obj)</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对象通过引用被赋值和拷贝。一个变量存储的不是 “对象的值”，而是一个对值的 “引用”（内存地址），因此拷贝此类变量或将其作为函数参数传递时，所拷贝是引用，而不是对象本身。</p>
+<p>所有通过被拷贝的引用的操作（如添加、删除属性）都作用在同一对象上。</p>
+<p>创建 “真正的拷贝”（一个克隆），可使用 <code>Object.assign</code> 实现 “浅拷贝”（嵌套对象被通过引用进行拷贝），或使用 “深拷贝” 函数，如 <code>_.cloneDeep(obj)</code>。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://zh.javascript.info/object-copy">https://zh.javascript.info/object-copy</a></p>
+
                 
               </div>
             
@@ -339,15 +349,32 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JavaScript/" class="category-chain-item">JavaScript</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
         <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
-      
-        <a href="/tags/object-Object/">#[object Object]</a>
-      
-        <a href="/tags/JavaScript/">#JavaScript</a>
       
     </div>
   
@@ -359,7 +386,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>对象</div>
+      <div>JSON Object 对象 &lt;二&gt;</div>
       <div>http://example.com/2023/04/13/JSON Object 对象(2)/</div>
     </div>
     <div class="license-meta">
