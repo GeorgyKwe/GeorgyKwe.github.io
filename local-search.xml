@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>原始类型的方法</title>
+    <link href="/2023/04/17/%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <url>/2023/04/17/%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h2 id="原始类型和对象区别"><a href="#原始类型和对象区别" class="headerlink" title="原始类型和对象区别"></a>原始类型和对象区别</h2><p>一个原始值：</p><ul><li>是原始类型中的一种值；</li><li>在 JavaScript 中有7中原始类型：<code>string</code>、<code>number</code>、<code>bigint</code>、<code>boolean</code>、<code>symbol</code>、<code>null</code> 和 <code>undefined</code>。</li></ul><p>一个对象：</p><ul><li>能够存储多个值作为属性；</li><li>可以使用大括号 <code>&#123;&#125;</code> 创建对象，例如：<code>&#123;name：&quot;John&quot;, age: 30&#125;</code>。函数也是对象。</li></ul><p>例如：将一个函数作为对象的属性存储到对象中。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> john = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,<br>    <span class="hljs-attr">syaHi</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>)<br>    &#125;<br>&#125;;<br><br>john.<span class="hljs-title function_">sayHi</span>();   <span class="hljs-comment">// Hello World!</span><br></code></pre></td></tr></table></figure><p>上述创建了一个包含 <code>sayHi</code> 方法的对象 <code>john</code>，但对象比原始类型“更重”，需要额外的资源来支持运作。</p><h2 id="当做对象的原始类型"><a href="#当做对象的原始类型" class="headerlink" title="当做对象的原始类型"></a>当做对象的原始类型</h2><p>为解决如下两个问题：</p><ol><li>想对诸如字符串或数字之类的原始类型执行操作；</li><li>原始类型必须尽可能的简单轻量。</li></ol><p>提出如下的解决方法：</p><ol><li>原始类型仍然是原始的，与预期相同，提供单个值；</li><li>JavaScript 允许访问字符串、数字、布尔值和 symbol 的方法和属性；</li><li>为使它们起作用，创建了提供额外功能的特殊“对象包装器”，使用后即被销毁。</li></ol><p>“对象包装器”对于每种原始类型都是不同的，其被称为 <code>String</code>、<code>Number</code>、<code>Boolean</code>、<code>Symbol</code> 和 <code>Bigint</code>。因此提供了不同的方法。</p><h3 id="str-toUpperCase"><a href="#str-toUpperCase" class="headerlink" title="str.toUpperCase()"></a>str.toUpperCase()</h3><p>字符串方法 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase">str.toUpperCase()</a> 返回一个大写化处理的字符串。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;Hello&quot;</span>;<br><span class="hljs-title function_">alert</span>(str.<span class="hljs-title function_">toUpperCase</span>());   <span class="hljs-comment">// HELLO</span><br></code></pre></td></tr></table></figure><p><code>toUpperCase()</code> 中实际发生的情况：</p><ol><li>字符串 str 是一个原始值。在访问其属性时，会创建一个包含字符串字面量的特殊对象，并且具有可用的方法，如 <code>toUpperCase()</code>；</li><li>该方法运行并返回一个新的字符串（由 <code>alert</code> 显示）；</li><li>特殊对象被销毁后，只留下原始值 <code>str</code>。</li></ol><p>所以原始类型可以提供方法，但他们依然是轻量级。</p><h3 id="toFixed-n"><a href="#toFixed-n" class="headerlink" title="toFixed(n)"></a>toFixed(n)</h3><p>数量方法，如 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed(n)</a> 将数字舍入到给定的精度。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> n = <span class="hljs-number">1.23456</span>;<br><br><span class="hljs-title function_">alert</span>(n.<span class="hljs-title function_">toFixed</span>(<span class="hljs-number">2</span>));    <span class="hljs-comment">// 1.23</span><br></code></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>除 null 和 undefined 以外的原始类型都提供了许多有用的方法；</li><li>从形式上看，这些方法通过临时对象工作，但 JavaScript 引擎可以很好的调整，以在内部对齐进行优化，因此调用并不需要太高的成本。</li></ul><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zh.javascript.info/primitives-methods">https://zh.javascript.info/primitives-methods</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JavaScript</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>构造器和操作符“new”</title>
     <link href="/2023/04/17/%E6%9E%84%E9%80%A0%E5%99%A8/"/>
     <url>/2023/04/17/%E6%9E%84%E9%80%A0%E5%99%A8/</url>

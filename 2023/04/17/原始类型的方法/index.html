@@ -16,22 +16,22 @@
   <meta name="author" content="GeorgyKwe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="构造函数构造函数一般为常规函数，在构造时通常有以下两个约定：  命名以答谢字母开始； 只能由 new 操作符来执行；  123456789function User(name) &amp;#123;    this.name &#x3D; name;    this.isAdmin &#x3D; false;&amp;#125;let user &#x3D; new User(&quot;Jack&quot;);alert(user.name">
+    <meta name="description" content="原始类型和对象区别一个原始值：  是原始类型中的一种值； 在 JavaScript 中有7中原始类型：string、number、bigint、boolean、symbol、null 和 undefined。  一个对象：  能够存储多个值作为属性； 可以使用大括号 &amp;#123;&amp;#125; 创建对象，例如：&amp;#123;name：&quot;John&quot;, age: 30&amp;#125;。函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="构造器和操作符“new”">
-<meta property="og:url" content="http://example.com/2023/04/17/%E6%9E%84%E9%80%A0%E5%99%A8/index.html">
+<meta property="og:title" content="原始类型的方法">
+<meta property="og:url" content="http://example.com/2023/04/17/%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="我与我斗争">
-<meta property="og:description" content="构造函数构造函数一般为常规函数，在构造时通常有以下两个约定：  命名以答谢字母开始； 只能由 new 操作符来执行；  123456789function User(name) &amp;#123;    this.name &#x3D; name;    this.isAdmin &#x3D; false;&amp;#125;let user &#x3D; new User(&quot;Jack&quot;);alert(user.name">
+<meta property="og:description" content="原始类型和对象区别一个原始值：  是原始类型中的一种值； 在 JavaScript 中有7中原始类型：string、number、bigint、boolean、symbol、null 和 undefined。  一个对象：  能够存储多个值作为属性； 可以使用大括号 &amp;#123;&amp;#125; 创建对象，例如：&amp;#123;name：&quot;John&quot;, age: 30&amp;#125;。函数">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-17T01:19:24.000Z">
-<meta property="article:modified_time" content="2023-04-17T02:51:47.491Z">
+<meta property="article:published_time" content="2023-04-17T03:05:57.000Z">
+<meta property="article:modified_time" content="2023-04-17T06:06:12.764Z">
 <meta property="article:author" content="GeorgyKwe">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>构造器和操作符“new” - 我与我斗争</title>
+  <title>原始类型的方法 - 我与我斗争</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="构造器和操作符“new”"></span>
+            <span id="subtitle" data-typed-text="原始类型的方法"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-17 09:19" pubdate>
+        <time datetime="2023-04-17 11:05" pubdate>
           2023年4月17日 上午
         </time>
       </span>
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.1k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          16 分钟
+          10 分钟
         
       </span>
     
@@ -269,58 +269,55 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">构造器和操作符“new”</h1>
+            <h1 style="display: none">原始类型的方法</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>构造函数一般为常规函数，在构造时通常有以下两个约定：</p>
+                <h2 id="原始类型和对象区别"><a href="#原始类型和对象区别" class="headerlink" title="原始类型和对象区别"></a>原始类型和对象区别</h2><p>一个原始值：</p>
 <ul>
-<li>命名以答谢字母开始；</li>
-<li>只能由 <code>new</code> 操作符来执行；</li>
+<li>是原始类型中的一种值；</li>
+<li>在 JavaScript 中有7中原始类型：<code>string</code>、<code>number</code>、<code>bigint</code>、<code>boolean</code>、<code>symbol</code>、<code>null</code> 和 <code>undefined</code>。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">User</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAdmin</span> = <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-keyword">let</span> user = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;Jack&quot;</span>);<br><br><span class="hljs-title function_">alert</span>(user.<span class="hljs-property">name</span>);       <span class="hljs-comment">// Jack</span><br><span class="hljs-title function_">alert</span>(user.<span class="hljs-property">isAdmin</span>);    <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
-
-<p>当一个函数被使用 <code>new</code> 操作符执行时，会执行如下步骤：</p>
+<p>一个对象：</p>
 <ul>
-<li>一个新的空对象会被创建并分配给 <code>this</code>；</li>
-<li>函数体执行，通常会修改 <code>this</code>，为其添加新的属性；</li>
-<li>返回 <code>this</code> 的值。</li>
+<li>能够存储多个值作为属性；</li>
+<li>可以使用大括号 <code>&#123;&#125;</code> 创建对象，例如：<code>&#123;name：&quot;John&quot;, age: 30&#125;</code>。函数也是对象。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">User</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-comment">// this = &#123;&#125;; 隐式创建</span><br><br>    <span class="hljs-comment">// 添加属性到 this</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAdmin</span> = <span class="hljs-literal">false</span>;<br><br>    <span class="hljs-comment">// return this； 隐式返回</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>例如：将一个函数作为对象的属性存储到对象中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> john = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,<br>    <span class="hljs-attr">syaHi</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Hello World!&quot;</span>)<br>    &#125;<br>&#125;;<br><br>john.<span class="hljs-title function_">sayHi</span>();   <span class="hljs-comment">// Hello World!</span><br></code></pre></td></tr></table></figure>
 
-<p><code>new User(&quot;Jack&quot;)</code> 的结果与上面为同样的对象：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> <span class="hljs-title class_">User</span> =  &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isAdmin</span> = <span class="hljs-literal">false</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>上述创建了一个包含 <code>sayHi</code> 方法的对象 <code>john</code>，但对象比原始类型“更重”，需要额外的资源来支持运作。</p>
+<h2 id="当做对象的原始类型"><a href="#当做对象的原始类型" class="headerlink" title="当做对象的原始类型"></a>当做对象的原始类型</h2><p>为解决如下两个问题：</p>
+<ol>
+<li>想对诸如字符串或数字之类的原始类型执行操作；</li>
+<li>原始类型必须尽可能的简单轻量。</li>
+</ol>
+<p>提出如下的解决方法：</p>
+<ol>
+<li>原始类型仍然是原始的，与预期相同，提供单个值；</li>
+<li>JavaScript 允许访问字符串、数字、布尔值和 symbol 的方法和属性；</li>
+<li>为使它们起作用，创建了提供额外功能的特殊“对象包装器”，使用后即被销毁。</li>
+</ol>
+<p>“对象包装器”对于每种原始类型都是不同的，其被称为 <code>String</code>、<code>Number</code>、<code>Boolean</code>、<code>Symbol</code> 和 <code>Bigint</code>。因此提供了不同的方法。</p>
+<h3 id="str-toUpperCase"><a href="#str-toUpperCase" class="headerlink" title="str.toUpperCase()"></a>str.toUpperCase()</h3><p>字符串方法 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase">str.toUpperCase()</a> 返回一个大写化处理的字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;Hello&quot;</span>;<br><span class="hljs-title function_">alert</span>(str.<span class="hljs-title function_">toUpperCase</span>());   <span class="hljs-comment">// HELLO</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="构造器模式测试"><a href="#构造器模式测试" class="headerlink" title="构造器模式测试"></a>构造器模式测试</h2><p>在函数内部，可使用 <code>new.target</code> 属性来检查是否被 <code>new</code> 调用。对于常规调用，结果为 <code>undefined</code>，对于使用 <code>new</code> 的调用，则等于该函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span>  <span class="hljs-title function_">User</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-title function_">alert</span>(<span class="hljs-keyword">new</span>.<span class="hljs-property">target</span>);<br>&#125;<br><br><span class="hljs-comment">// 不带 new</span><br><span class="hljs-title class_">User</span>();     <span class="hljs-comment">// undefined</span><br><br><span class="hljs-comment">// 带 new</span><br><span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(); <span class="hljs-comment">// function User &#123;...&#125;</span><br></code></pre></td></tr></table></figure>
-
-<p><code>new.target</code> 属性可被用在函数内部，来判断该函数是被通过 <code>new</code> 调用的“构造器模式”，还是没被通过 <code>new</code> 调用的“常规模式”。</p>
-<p>同时，也可让 new 调用和常规调用做相同的工作。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">User</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">new</span>.<span class="hljs-property">target</span>) &#123;           <span class="hljs-comment">// 若没有通过 new 运行</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(name);  <span class="hljs-comment">// 将会添加 new</span><br>    &#125;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>&#125;<br><br><span class="hljs-keyword">let</span> john = <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;John&quot;</span>);    <span class="hljs-comment">// 将调用重定向到新用户</span><br><span class="hljs-title function_">alert</span>(john.<span class="hljs-property">name</span>);           <span class="hljs-comment">// John</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="构造器的-return"><a href="#构造器的-return" class="headerlink" title="构造器的 return"></a>构造器的 return</h2><p>通常，构造器没有 return 语句，其任务是将所有必要的东西写入 this，并自动转化为结果。</p>
-<p>但如果这有一个 return 语句，规则就简单：</p>
-<ul>
-<li>若 return 返回值是一个对象，则返回这个对虾干，而不是 this；</li>
-<li>若 return 返回的是一个原始类型，则忽略；</li>
-</ul>
-<p>换句话说，带有对象的 return 返回该对象，在所有其他情况下返回 this。</p>
-<p>例如，<code>return</code> 通过返回一个对象覆盖 <code>this</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">BigUser</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;John&quot;</span>;<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-attr">name</span>: <span class="hljs-string">&quot;George&quot;</span>&#125;;    <span class="hljs-comment">// 返回这个对象</span><br>&#125;<br><br><span class="hljs-title function_">alert</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BigUser</span>().<span class="hljs-property">name</span>);      <span class="hljs-comment">// George，得到那个对象</span><br></code></pre></td></tr></table></figure>
-
-<p>例如，有一个 return 为空的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">SmallUser</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;John&quot;</span>;<br>    <span class="hljs-keyword">return</span>;                     <span class="hljs-comment">// 返回 this</span><br>&#125;<br><br><span class="hljs-title function_">alert</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">SmallUser</span>().<span class="hljs-property">name</span>);    <span class="hljs-comment">// John</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="构造器中的方法"><a href="#构造器中的方法" class="headerlink" title="构造器中的方法"></a>构造器中的方法</h2><p>使用构造函数来创建对象会带来很大的灵活性。既可以将属性添加到 this 中，还可以添加方法。</p>
-<p>例如，下面的 <code>new User(name)</code> 用给定的 <code>name</code> 和方法 <code>sayHi</code> 创建了一个对象：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">User</span>(<span class="hljs-params">name</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">sayHi</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;My name is:&quot;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>    &#125;;<br>&#125;<br><br><span class="hljs-keyword">let</span> john = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;John&quot;</span>);<br>john.<span class="hljs-title function_">sayHi</span>();   <span class="hljs-comment">// My name is: John</span><br></code></pre></td></tr></table></figure>
+<p><code>toUpperCase()</code> 中实际发生的情况：</p>
+<ol>
+<li>字符串 str 是一个原始值。在访问其属性时，会创建一个包含字符串字面量的特殊对象，并且具有可用的方法，如 <code>toUpperCase()</code>；</li>
+<li>该方法运行并返回一个新的字符串（由 <code>alert</code> 显示）；</li>
+<li>特殊对象被销毁后，只留下原始值 <code>str</code>。</li>
+</ol>
+<p>所以原始类型可以提供方法，但他们依然是轻量级。</p>
+<h3 id="toFixed-n"><a href="#toFixed-n" class="headerlink" title="toFixed(n)"></a>toFixed(n)</h3><p>数量方法，如 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed(n)</a> 将数字舍入到给定的精度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> n = <span class="hljs-number">1.23456</span>;<br><br><span class="hljs-title function_">alert</span>(n.<span class="hljs-title function_">toFixed</span>(<span class="hljs-number">2</span>));    <span class="hljs-comment">// 1.23</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>构造函数，简称构造器，就是常规函数；</li>
-<li>构造函数只能使用 <code>new</code> 来调用，这样调用意味着在开始时创建了空的 <code>this</code>，并在最后返回填充了值得 <code>this</code>。</li>
+<li>除 null 和 undefined 以外的原始类型都提供了许多有用的方法；</li>
+<li>从形式上看，这些方法通过临时对象工作，但 JavaScript 引擎可以很好的调整，以在内部对齐进行优化，因此调用并不需要太高的成本。</li>
 </ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://zh.javascript.info/constructor-new">https://zh.javascript.info/constructor-new</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://zh.javascript.info/primitives-methods">https://zh.javascript.info/primitives-methods</a></p>
 
                 
               </div>
@@ -366,8 +363,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>构造器和操作符“new”</div>
-      <div>http://example.com/2023/04/17/构造器/</div>
+      <div>原始类型的方法</div>
+      <div>http://example.com/2023/04/17/原始类型的方法/</div>
     </div>
     <div class="license-meta">
       
@@ -411,18 +408,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/17/%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/" title="原始类型的方法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">原始类型的方法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/14/%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/" title="对象方法">
-                        <span class="hidden-mobile">对象方法</span>
+                      <a href="/2023/04/17/%E6%9E%84%E9%80%A0%E5%99%A8/" title="构造器和操作符“new”">
+                        <span class="hidden-mobile">构造器和操作符“new”</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
