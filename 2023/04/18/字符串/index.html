@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="GeorgyKwe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="字符串文本数据被以字符串形式存储，单个字符没有单独的类型。字符串的内部格式始终是 UTF-16，不依赖于页面编码。 引号（Quotes）字符串可以包含在单引号、双引号或反引号中。 1234let single &#x3D; &amp;#x27;single-quoted&amp;#x27;let double &#x3D; &quot;double-quoted&quot;let backticks &#x3D; &#96;backticks&#96;  单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串">
+<meta property="og:url" content="http://example.com/2023/04/18/%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="我与我斗争">
+<meta property="og:description" content="字符串文本数据被以字符串形式存储，单个字符没有单独的类型。字符串的内部格式始终是 UTF-16，不依赖于页面编码。 引号（Quotes）字符串可以包含在单引号、双引号或反引号中。 1234let single &#x3D; &amp;#x27;single-quoted&amp;#x27;let double &#x3D; &quot;double-quoted&quot;let backticks &#x3D; &#96;backticks&#96;  单">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-18T01:14:34.000Z">
+<meta property="article:modified_time" content="2023-04-18T06:38:00.966Z">
+<meta property="article:author" content="GeorgyKwe">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>字符串 - 我与我斗争</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>我与我斗争</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="字符串"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-18 09:14" pubdate>
+          2023年4月18日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          59 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">字符串</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>文本数据被以字符串形式存储，单个字符没有单独的类型。字符串的内部格式始终是 UTF-16，不依赖于页面编码。</p>
+<h2 id="引号（Quotes）"><a href="#引号（Quotes）" class="headerlink" title="引号（Quotes）"></a>引号（Quotes）</h2><p>字符串可以包含在单引号、双引号或反引号中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> single = <span class="hljs-string">&#x27;single-quoted&#x27;</span><br><span class="hljs-keyword">let</span> double = <span class="hljs-string">&quot;double-quoted&quot;</span><br><br><span class="hljs-keyword">let</span> backticks = <span class="hljs-string">`backticks`</span><br></code></pre></td></tr></table></figure>
+
+<p>单引号和双引号基本相同，但反引号允许通过 <code>$&#123;...&#125;</code> 将任何表达式嵌入到字符串中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sum</span>(<span class="hljs-params">a, b</span>) &#123;<br>    <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><br><span class="hljs-title function_">alert</span>(<span class="hljs-string">`1 + 2 = <span class="hljs-subst">$&#123;sum(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)&#125;</span>`</span>);  <span class="hljs-comment">// 1 + 2 = 3</span><br></code></pre></td></tr></table></figure>
+
+<p>使用反引号的另一个优点：允许字符串跨行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> guestList = <span class="hljs-string">`Guests:</span><br><span class="hljs-string">    * A</span><br><span class="hljs-string">    * B</span><br><span class="hljs-string">    * C</span><br><span class="hljs-string">`</span>;<br><span class="hljs-title function_">alert</span>(guestList);   <span class="hljs-comment">// 客人清单，多行</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><p>上述换行中，也可通过使用“换行符 <code>\n</code>”支持单引号和双引号来创建跨行字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> guestList = <span class="hljs-string">&quot;Guests:\n * A\n * B\n * C&quot;</span>;<br><span class="hljs-title function_">alert</span>(guestList);   <span class="hljs-comment">// 客人清单，多行</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str1 = <span class="hljs-string">&quot;Hello\nWorld&quot;</span>;  <span class="hljs-comment">// 使用“换行符”创建的两行字符串</span><br><br><span class="hljs-comment">// 使用反引号和普通的换行创建的两行字符串</span><br><span class="hljs-keyword">let</span> str2 = <span class="hljs-string">`Hello           </span><br><span class="hljs-string">World`</span>;<br><br><span class="hljs-title function_">alert</span>(str1 == str2); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<p>不常见“特殊”字符表。</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\n</code></td>
+<td>换行</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>在非 Windows OS 上，等同于 <code>\n</code></td>
+</tr>
+<tr>
+<td><code>\&#39;</code>, <code>\&quot;</code></td>
+<td>引号</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>反斜线</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>制表符</td>
+</tr>
+<tr>
+<td><code>\xXX</code></td>
+<td>具有给定十六进制 Unicode <code>xx</code> 的 Unicode 字符，例如：<code>\x7A</code> 和 <code>z</code> 相同</td>
+</tr>
+<tr>
+<td><code>\uXXXX</code></td>
+<td>以 UTF-16 编码的十六进制代码 <code>XXXX</code> 的 Unicode 字符，例如 <code>\u00A9</code> —— 是版权符号 © 的 Unicode。它必须正好是 4 个十六进制数字</td>
+</tr>
+<tr>
+<td><code>\u&#123;X...XXXXXX&#125;</code>（1到6个十六进制字符）</td>
+<td>具有给定 UTF-32 编码的 Unicode 符号。一些罕见的字符用两个 Unicode 符号编码，占用 4 个字节</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h3><p>所有特殊符号都以反斜杠字符 <code>\</code> 开始。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;\u00A9&quot;</span>);        <span class="hljs-comment">// ©</span><br><span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;\u&#123;20331&#125;&quot;</span>);     <span class="hljs-comment">// 佫，罕见的中国象形文字（长 Unicode）</span><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;\u&#123;1F60D&#125;&quot;</span> );   <span class="hljs-comment">// 😍，笑脸符号（另一个长 Unicode）</span><br></code></pre></td></tr></table></figure>
+
+<p>如果想要在字符串中插入一个引号，用来表示引用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;I\&#x27;m George!&#x27;</span>);  <span class="hljs-comment">// I&#x27;m George!</span><br></code></pre></td></tr></table></figure>
+
+<p>上面单引号 <code>&#39;&#39;</code> 示例中必须要在内部引号前加上反斜杠 <code>\&#39;</code>，否则将表示字符串结束。</p>
+<p>还可改用双引号或反引号来实现相同效果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">`I&#x27;m the George!`</span> ); <span class="hljs-comment">// I&#x27;m the George!</span><br></code></pre></td></tr></table></figure>
+
+<p>如果要在字符串中显示一个实际的反斜杠 <code>\</code>，只需要书写两次 <code>\\</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">`The Burberry: \\`</span> ); <span class="hljs-comment">// The Burberry: \</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="字符串长度"><a href="#字符串长度" class="headerlink" title="字符串长度"></a>字符串长度</h2><p><code>length</code> 表示字符串长度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">` My\n`</span>.<span class="hljs-property">length</span>);  <span class="hljs-comment">// 3</span><br></code></pre></td></tr></table></figure>
+
+<p>注：<code>\n</code> 是一个单独的“特殊”字符，长度确实是 3。</p>
+<blockquote>
+<p><code>length</code> 是一个属性。</p>
+<p><code>str.length</code> 是一个数字属性，而不是函数，后面不需要添加括号。</p>
+</blockquote>
+<h2 id="访问字符"><a href="#访问字符" class="headerlink" title="访问字符"></a>访问字符</h2><p>若要获取 <code>pos</code> 位置的一个字符，可以使用方括号 <code>[pos]</code> 或者调用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/charAt">str.charAt(pos)</a> 方法。第一个字符从零位置开始：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;Hello&quot;</span>;<br><br><span class="hljs-comment">// 第一个字符</span><br><span class="hljs-title function_">alert</span>( str[<span class="hljs-number">0</span>] );        <span class="hljs-comment">// H</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">charAt</span>(<span class="hljs-number">0</span>) ); <span class="hljs-comment">// H</span><br><br><span class="hljs-comment">// 最后一个字符</span><br><span class="hljs-title function_">alert</span>( str[str.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>] );   <span class="hljs-comment">// o</span><br></code></pre></td></tr></table></figure>
+
+<p><code>[]</code> 和 <code>charAt</code> 区别：</p>
+<ul>
+<li>方括号是获取字符的一种现代化方法；<code>charAt</code> 是历史原因才存在；</li>
+<li>唯一区别在于，若没有找到字符，<code>[]</code> 返回 <code>undefined</code>，而 <code>charAt</code>返回一个空字符串。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">`Hello`</span>;<br><br><span class="hljs-title function_">alert</span>( str[<span class="hljs-number">1000</span>] );         <span class="hljs-comment">// undefined</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">charAt</span>(<span class="hljs-number">1000</span>) );  <span class="hljs-comment">// &#x27;&#x27;（空字符串）</span><br></code></pre></td></tr></table></figure>
+
+<p>同样，可以使用 <code>for...of</code> 遍历字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> char <span class="hljs-keyword">of</span> <span class="hljs-string">&quot;Hello&quot;</span>) &#123;<br>    <span class="hljs-title function_">alert</span>(char);            <span class="hljs-comment">// H,e,l,l,o（char 变成&quot;H&quot;，然后是&quot;e&quot;...）</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="字符串不可变"><a href="#字符串不可变" class="headerlink" title="字符串不可变"></a>字符串不可变</h2><p>在 JavaScript 中，字符串不可更改。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;Hi&#x27;</span>;<br><br>str[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;h&#x27;</span>;       <span class="hljs-comment">// error</span><br><span class="hljs-title function_">alert</span>( str[<span class="hljs-number">0</span>] );    <span class="hljs-comment">// 无法运行</span><br></code></pre></td></tr></table></figure>
+
+<p>常见的解决方法是创建一个新的字符串，并将其分配给 <code>str</code> 而不是以前的字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;Hi&#x27;</span>;<br><br>str = <span class="hljs-string">&#x27;h&#x27;</span> + str[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 替换字符串</span><br><span class="hljs-title function_">alert</span>( str );       <span class="hljs-comment">// hi</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="改变大小写"><a href="#改变大小写" class="headerlink" title="改变大小写"></a>改变大小写</h2><h3 id="toLowerCase-和-toUpperCase"><a href="#toLowerCase-和-toUpperCase" class="headerlink" title="toLowerCase() 和 toUpperCase()"></a>toLowerCase() 和 toUpperCase()</h3><p>使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">toLowerCase()</a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase">toUpperCase()</a> 方法可以改变大小写。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&#x27;Interface&#x27;</span>.<span class="hljs-title function_">toUpperCase</span>() ); <span class="hljs-comment">// INTERFACE</span><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&#x27;Interface&#x27;</span>.<span class="hljs-title function_">toLowerCase</span>() ); <span class="hljs-comment">// interface</span><br></code></pre></td></tr></table></figure>
+
+<p>也可使一个字符变成小写。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&#x27;Interface&#x27;</span>[<span class="hljs-number">0</span>].<span class="hljs-title function_">toLowerCase</span>() );  <span class="hljs-comment">// i</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="查找子字符串"><a href="#查找子字符串" class="headerlink" title="查找子字符串"></a>查找子字符串</h2><p>在字符串中查找子字符串的方法。</p>
+<h3 id="str-indexOf"><a href="#str-indexOf" class="headerlink" title="str.indexOf"></a>str.indexOf</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf">str.indexOf(substr, pos)</a> 从给定位置 <code>pos</code> 开始，在 <code>str</code> 中查找 <code>substr</code>，若没有找到，则返回 <code>-1</code>，否则返回匹配成功的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;Widget with id&#x27;</span>;<br><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;Widget&#x27;</span>) ); <span class="hljs-comment">// 0，因为 &#x27;Widget&#x27; 一开始就被找到</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;widget&#x27;</span>) ); <span class="hljs-comment">// -1，没有找到，检索是大小写敏感的</span><br><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;id&quot;</span>) );     <span class="hljs-comment">// 1，&quot;id&quot; 在位置 1 处（……idget 和 id）</span><br></code></pre></td></tr></table></figure>
+
+<p>可选的第二个参数允许从一个给定的位置开始检索。例如，<code>id</code> 第一次出现的位置是 <code>1</code>，查询到下一个存在的位置时，从 2 开始检索。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;Widget with id&#x27;</span>;<br><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-number">2</span>) ) <span class="hljs-comment">// 12</span><br></code></pre></td></tr></table></figure>
+
+<p>若对所有存在的位置都感兴趣，可以在一个循环中使用 <code>indexOf</code>。每一次新的调用都发生在上一匹配位置之后。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;As sly as a fox, as strong as an ox&#x27;</span>;<br><span class="hljs-keyword">let</span> target = <span class="hljs-string">&#x27;as&#x27;</span>;  <span class="hljs-comment">// 这是我们要查找的目标</span><br><br><span class="hljs-keyword">let</span> pos = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) &#123;<br>    <span class="hljs-keyword">let</span> foundPos = str.<span class="hljs-title function_">indexOf</span>(target, pos);<br>    <span class="hljs-keyword">if</span>(foundPos == -<span class="hljs-number">1</span>) <span class="hljs-keyword">break</span>;<br>    <span class="hljs-title function_">alert</span>( <span class="hljs-string">`Found at <span class="hljs-subst">$&#123;foundPos&#125;</span>`</span> );<br>    pos = foundPos + <span class="hljs-number">1</span>; <span class="hljs-comment">// 继续从下一位置查找</span><br>&#125;<br>---------- 算法简写 ---------<br><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;As sly as a fox, as strong as an ox&quot;</span>;<br><span class="hljs-keyword">let</span> target = <span class="hljs-string">&quot;as&quot;</span>;<br><br><span class="hljs-keyword">let</span> pos = -<span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span>((pos = str.<span class="hljs-title function_">indexOf</span>(target, pos + <span class="hljs-number">1</span>)) != -<span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-title function_">alert</span>( pos );<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="str-lastIndexOf-substr-pos"><a href="#str-lastIndexOf-substr-pos" class="headerlink" title="str.lastIndexOf(substr, pos)"></a>str.lastIndexOf(substr, pos)</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf">str.lastIndexOf(substr, position)</a>，它从字符串的末尾开始搜索到开头，将会以相反的顺序列出这些事件。</p>
+<h2 id="按位（bitwise）NOT技巧"><a href="#按位（bitwise）NOT技巧" class="headerlink" title="按位（bitwise）NOT技巧"></a>按位（bitwise）NOT技巧</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT">bitwise NOT</a> <code>~</code> 运算符，能将数字转化为 32-bit 整数，（若存在小数部分，则删除小数部分），然后对其二进制表示形式中的所有位取反。</p>
+<p>对于 32-bit 整数，<code>~n</code> 等于 <code>-(n+1)</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( ~<span class="hljs-number">2</span> );    <span class="hljs-comment">// -3，和 -(2+1) 相同</span><br><span class="hljs-title function_">alert</span>( ~<span class="hljs-number">1</span> );    <span class="hljs-comment">// -2，和 -(1+1) 相同</span><br><span class="hljs-title function_">alert</span>( ~<span class="hljs-number">0</span> );    <span class="hljs-comment">// -1，和 -(0+1) 相同</span><br><span class="hljs-title function_">alert</span>( ~-<span class="hljs-number">1</span> );   <span class="hljs-comment">// 0，和 -(-1+1) 相同</span><br></code></pre></td></tr></table></figure>
+
+<p>只有当 <code>n == -1</code> 时，<code>~n</code> 才为零。</p>
+<h2 id="includes-startWith-endsWith"><a href="#includes-startWith-endsWith" class="headerlink" title="includes, startWith, endsWith"></a>includes, startWith, endsWith</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/includes">str.includes(substr, pos)</a>方法根据 <code>str</code> 中是否包含 <code>substr</code> 来返回 <code>true/false</code>。</p>
+<p>如果需要检测匹配，则不需要第二个位置参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;Widget with id&quot;</span>.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&quot;Widget&quot;</span>) );   <span class="hljs-comment">// true</span><br><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;Hello&quot;</span>.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&quot;Bye&quot;</span>) );               <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+
+<p><code>str.includes</code> 的第二个可选参数是开始搜索的起始位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;Widget&quot;</span>.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&quot;id&quot;</span>) );       <span class="hljs-comment">// true</span><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;Widget&quot;</span>.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>) );    <span class="hljs-comment">// false, 从位置 3 开始没有 &quot;id&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>方法 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith">str.startsWith</a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith">str.endsWith</a> 的功能与其名称所表示的意思相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;Widget&quot;</span>.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">&quot;Wid&quot;</span>) );    <span class="hljs-comment">// true，&quot;Widget&quot; 以 &quot;Wid&quot; 开始</span><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;Widget&quot;</span>.<span class="hljs-title function_">endsWith</span>(<span class="hljs-string">&quot;get&quot;</span>) );      <span class="hljs-comment">// true，&quot;Widget&quot; 以 &quot;get&quot; 结束</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="获取子字符串"><a href="#获取子字符串" class="headerlink" title="获取子字符串"></a>获取子字符串</h2><p>JavaScript 中有三种获取字符串的方法：<code>substring</code>、<code>substr</code>、<code>slice</code>。</p>
+<h3 id="str-slice-start-end"><a href="#str-slice-start-end" class="headerlink" title="str.slice(start [, end])"></a>str.slice(start [, end])</h3><p><code>str.slice(start [, end])</code> 返回字符串从 <code>start</code> 到（但不包括） end 的部分。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;stringify&quot;</span>;<br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>) );   <span class="hljs-comment">// &#x27;strin&#x27;，从 0 到 5 的子字符串（不包括 5）</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>) );   <span class="hljs-comment">// &#x27;s&#x27;，从 0 到 1，但不包括 1，所以只有在 0 处的字符</span><br></code></pre></td></tr></table></figure>
+
+<p>若没有第二个参数，slice 会一直运行到字符串末尾。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;stringify&quot;</span>;<br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">slice</span>(<span class="hljs-number">2</span>) );      <span class="hljs-comment">// 从第二个位置直到结束</span><br></code></pre></td></tr></table></figure>
+
+<p><code>start/end</code> 也有可能是负值，意思为起始位置从字符串结尾计算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;stringify&quot;</span>;<br><br><span class="hljs-comment">// 从右边的第四个位置开始，在右边的第一个位置结束</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">slice</span>(-<span class="hljs-number">4</span>, -<span class="hljs-number">1</span>) ); <span class="hljs-comment">// &#x27;gif&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="str-substring-start-end"><a href="#str-substring-start-end" class="headerlink" title="str.substring(start [, end])"></a>str.substring(start [, end])</h3><p><code>str.substring(start [, end])</code> 方法与 <code>slice</code> 几乎相同，但其允许 <code>start</code> 大于 <code>end</code>，将返回字符串从 <code>start</code> 到（但不包括）<code>end</code> 的部分。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;stringify&quot;</span>;<br><br><span class="hljs-comment">// 这些对于 substring 是相同的</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">2</span>, <span class="hljs-number">6</span>) );   <span class="hljs-comment">// &quot;ring&quot;</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">substring</span>(<span class="hljs-number">6</span>, <span class="hljs-number">2</span>) );   <span class="hljs-comment">// &quot;ring&quot;</span><br><br><span class="hljs-comment">// ……但对 slice 是不同的：</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">slice</span>(<span class="hljs-number">2</span>, <span class="hljs-number">6</span>) );       <span class="hljs-comment">// &quot;ring&quot;（一样）</span><br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">slice</span>(<span class="hljs-number">6</span>, <span class="hljs-number">2</span>) );       <span class="hljs-comment">// &quot;&quot;（空字符串）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="str-substr-start-length"><a href="#str-substr-start-length" class="headerlink" title="str.substr(start [, length])"></a>str.substr(start [, length])</h3><p><code>str.substr(start [, length])</code> 方法允许指定 length 而不是结束位置，返回字符串从 <code>start</code> 开始的给定 <code>length</code> 的部分。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;stringify&quot;</span>;<br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">substr</span>(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>) );  <span class="hljs-comment">// &#x27;ring&#x27;，从位置 2 开始，获取 4 个字符</span><br></code></pre></td></tr></table></figure>
+
+<p>若第一个参数为负数，则从结尾算起。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&quot;stringify&quot;</span>;<br><span class="hljs-title function_">alert</span>( str.<span class="hljs-title function_">substr</span>(-<span class="hljs-number">4</span>, <span class="hljs-number">2</span>) ); <span class="hljs-comment">// &#x27;gi&#x27;，从第 4 位获取 2 个字符</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="比较字符串"><a href="#比较字符串" class="headerlink" title="比较字符串"></a>比较字符串</h2><p>字符串按照字母顺序逐字比较，但总存在一些问题。</p>
+<ol>
+<li><p>小写字母总大于大写字母。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&#x27;a&#x27;</span> &gt; <span class="hljs-string">&#x27;Z&#x27;</span> ); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>带变音符号的字母存在“乱序”的情况。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&#x27;Österreich&#x27;</span> &gt; <span class="hljs-string">&#x27;Zealand&#x27;</span> ); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>上述两种情况原因为，所有的字符串都使用 UTF-16 编码。即：每个字符都有对应的数字代码。有特殊的方法可以获取代码表示的字符，以及字符对应的代码。</p>
+<h3 id="str-codePointAt-pos"><a href="#str-codePointAt-pos" class="headerlink" title="str.codePointAt(pos)"></a>str.codePointAt(pos)</h3><p><code>str.codePointAt(pos)</code> 方法返回在 <code>pos</code> 位置的字符代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// 不同的字母有不同的代码</span><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;z&quot;</span>.<span class="hljs-title function_">codePointAt</span>(<span class="hljs-number">0</span>) );    <span class="hljs-comment">// 122</span><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&quot;Z&quot;</span>.<span class="hljs-title function_">codePointAt</span>(<span class="hljs-number">0</span>) );    <span class="hljs-comment">// 90</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="String-fromCodePoint-code"><a href="#String-fromCodePoint-code" class="headerlink" title="String.fromCodePoint(code)"></a>String.fromCodePoint(code)</h3><p><code>String.fromCodePoint(code)</code> 方法通过数字 <code>code</code> 创建字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-title class_">String</span>.<span class="hljs-title function_">fromCodePoint</span>(<span class="hljs-number">90</span>) );  <span class="hljs-comment">// Z</span><br></code></pre></td></tr></table></figure>
+
+<p>还可以用 <code>\u</code> 后跟十六进制代码，通过这些代码添加 Unicode 字符：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// 在十六进制系统中 90 为 5a</span><br><span class="hljs-title function_">alert</span>( <span class="hljs-string">&#x27;\u005a&#x27;</span> );  <span class="hljs-comment">// Z</span><br></code></pre></td></tr></table></figure>
+
+<p>代码为 65..220 的字符（拉丁字母和一些额外的字符），方法是创建一个字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;&#x27;</span>;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">65</span>; i &lt;= <span class="hljs-number">220</span>; i++) &#123;<br>  str += <span class="hljs-title class_">String</span>.<span class="hljs-title function_">fromCodePoint</span>(i);<br>&#125;<br><span class="hljs-title function_">alert</span>( str );<br><span class="hljs-comment">// ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz&#123;|&#125;~</span><br><span class="hljs-comment">// ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ</span><br></code></pre></td></tr></table></figure>
+
+<p>字符通过数字代码进行比较。越大的代码意味着字符越大。<code>a</code>（97）的代码大于 <code>Z</code>（90）的代码。</p>
+<ul>
+<li>所有小写字母追随在大写字母之后，因为它们的代码更大；</li>
+<li>一些像 <code>Ö</code> 的字母与主要字母表不同。这里，它的代码比任何从 <code>a</code> 到 <code>z</code> 的代码都要大。</li>
+</ul>
+<h2 id="正确的比较"><a href="#正确的比较" class="headerlink" title="正确的比较"></a>正确的比较</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare">String.prototype.localeCompare()</a> 方法会根据语言规则返回一个整数，这个整数能指示字符串 <code>str</code> 在排序顺序中排在字符串 <code>str2</code> 前面、后面、还是相同。</p>
+<ul>
+<li>如果 <code>str</code> 排在 <code>str2</code> 前面，则返回负数；</li>
+<li>如果 <code>str</code> 排在 <code>str2</code> 后面，则返回正数；</li>
+<li>如果他们在相同位置，则返回 <code>0</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">alert</span>( <span class="hljs-string">&#x27;Österreich&#x27;</span>.<span class="hljs-title function_">localeCompare</span>(<span class="hljs-string">&#x27;Zealand&#x27;</span>) ); <span class="hljs-comment">// -1</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>有 3 种类型的引号。反引号允许字符串跨越多行并可以使用 <code>$&#123;…&#125;</code> 在字符串中嵌入表达式；</li>
+<li>JavaScript 中的字符串使用的是 UTF-16 编码；</li>
+<li>我们可以使用像 <code>\n</code> 这样的特殊字符或通过使用 <code>\u...</code> 来操作它们的 Unicode 进行字符插入；</li>
+<li>获取字符时，使用 <code>[]</code>；</li>
+<li>获取子字符串，使用 <code>slice</code> 或 <code>substring</code>；</li>
+<li>字符串的大&#x2F;小写转换，使用：<code>toLowerCase/toUpperCase</code>；</li>
+<li>查找子字符串时，使用 <code>indexOf</code> 或 <code>includes/startsWith/endsWith</code> 进行简单检查；</li>
+<li>根据语言比较字符串时使用 <code>localeCompare</code>，否则将按字符代码进行比较。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://zh.javascript.info/string">https://zh.javascript.info/string</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JavaScript/" class="category-chain-item">JavaScript</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>字符串</div>
+      <div>http://example.com/2023/04/18/字符串/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>GeorgyKwe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/17/%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B/" title="数字类型">
+                        <span class="hidden-mobile">数字类型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+    
+      
+            
+                  
+                      <span id="busuanzi_container_site_uv">
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+                      </span>
+</div>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
