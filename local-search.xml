@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>eCharts X轴坐标文字显示不全</title>
+    <link href="/2023/04/20/X%E8%BD%B4%E5%9D%90%E6%A0%87%E6%96%87%E5%AD%97%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8/"/>
+    <url>/2023/04/20/X%E8%BD%B4%E5%9D%90%E6%A0%87%E6%96%87%E5%AD%97%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在 eCharts 中应用柱状图或折线图时，当数据量过多时，X 轴坐标信息就会显示不全。</p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="旋转属性"><a href="#旋转属性" class="headerlink" title="旋转属性"></a>旋转属性</h3><p>eCharts 图表组件内部有一个机制，用于统计 xAxis 坐标刻度的个数和图表宽度，从而会自动调整刻度间隔个数以此达到刻度互相之间不至于很拥挤而影响图表欣赏性。</p><p><code> xAxis.axisLabel. interval</code>：坐标轴刻度标签的显示间隔</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">interval = <span class="hljs-string">&#x27;auto&#x27;</span>,  <span class="hljs-comment">// 采用标签不重叠的策略间隔显示标签</span><br>interval = <span class="hljs-number">0</span>,       <span class="hljs-comment">// 强制显示所有标签</span><br>interval = <span class="hljs-number">1</span>,       <span class="hljs-comment">// 隔一个标签显示一个标签</span><br>interval = <span class="hljs-number">2</span>,       <span class="hljs-comment">// 隔两个标签显示一个标签</span><br></code></pre></td></tr></table></figure><p><code>xAxis.axisLabel. rotate</code>：刻度标签旋转的角度</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">rotate = <span class="hljs-number">30</span>,        <span class="hljs-comment">// 旋转角度从 -90° 到 90°</span><br></code></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-attr">xAxis</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;category&#x27;</span>,<br>    <span class="hljs-attr">axisTick</span>: &#123;<br>        <span class="hljs-attr">alignWithLabel</span>: <span class="hljs-literal">true</span><br>    &#125;,<br>    <span class="hljs-attr">data</span>: [],<br>    <span class="hljs-attr">axisLabel</span>: &#123;<br>        <span class="hljs-attr">interval</span>: <span class="hljs-number">0</span>,<br>        <span class="hljs-attr">rotate</span>: <span class="hljs-number">0</span>,<br>    &#125;,<br>&#125;,<br></code></pre></td></tr></table></figure><h3 id="dataZoom"><a href="#dataZoom" class="headerlink" title="dataZoom"></a>dataZoom</h3><p>dataZoom 组件用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-attr">dataZoom</span>: [&#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;slider&#x27;</span>,<br>    <span class="hljs-attr">orient</span>: <span class="hljs-string">&quot;horizontal&quot;</span>,<br>    <span class="hljs-attr">show</span>: <span class="hljs-literal">true</span>,     <span class="hljs-comment">// 控制滚动条显示隐藏</span><br>    <span class="hljs-attr">realtime</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 拖动滚动条时是否动态的更新图表数据</span><br>    <span class="hljs-attr">height</span>: <span class="hljs-number">20</span>,     <span class="hljs-comment">// 滚动条高度</span><br>    <span class="hljs-attr">startValue</span>: <span class="hljs-number">0</span>,  <span class="hljs-comment">// 数据窗口范围的起始数值</span><br>    <span class="hljs-attr">endValue</span>: <span class="hljs-number">6</span>,    <span class="hljs-comment">// 数据窗口范围的结束数值</span><br>    <span class="hljs-attr">bottom</span>: <span class="hljs-string">&#x27;3%&#x27;</span>,   <span class="hljs-comment">// 滚动条距边距离</span><br>    <span class="hljs-attr">zoomLock</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 控制面板是否进行缩放</span><br>&#125;],<br></code></pre></td></tr></table></figure><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://echarts.apache.org/zh/option.html#xAxis.axisLabel.interval">https://echarts.apache.org/zh/option.html#xAxis.axisLabel.interval</a></p><p><a href="https://my.oschina.net/u/4307631/blog/4012684">https://my.oschina.net/u/4307631/blog/4012684</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>echarts</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>浅谈 OTP</title>
     <link href="/2023/04/18/OTP/"/>
     <url>/2023/04/18/OTP/</url>
