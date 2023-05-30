@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>Linux 命令</title>
+    <link href="/2023/05/29/Linux%20%E5%91%BD%E4%BB%A4/"/>
+    <url>/2023/05/29/Linux%20%E5%91%BD%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Linux-常用命令"><a href="#Linux-常用命令" class="headerlink" title="Linux 常用命令"></a>Linux 常用命令</h2><h3 id="系统监视器"><a href="#系统监视器" class="headerlink" title="系统监视器"></a>系统监视器</h3><p>启动 Linux 资源管理器。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">gnome-system-monitor<br><span class="hljs-comment"># 若没有安装，则使用下面命令安装</span><br>sudo apt-get install gnome-system-monitor<br></code></pre></td></tr></table></figure><h3 id="pip-安装"><a href="#pip-安装" class="headerlink" title="pip 安装"></a>pip 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install python3-pip<br></code></pre></td></tr></table></figure><h3 id="useradd-命令"><a href="#useradd-命令" class="headerlink" title="useradd 命令"></a>useradd 命令</h3><p><strong>useradd</strong> 命令用于建立用户帐号。帐号建好之后，再用 <strong>passwd</strong> 设定帐号的密码。而可用 <strong>userdel</strong> 删除帐号。使用 <strong>useradd</strong> 指令所建立的帐号，实际上是保存在 <code>/etc/passwd</code> 文本文件中。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 语法</span><br>useradd [-mMnr][-c &lt;备注&gt;][-d &lt;登入目录&gt;][-e &lt;有效期限&gt;][-f &lt;缓冲天数&gt;][-g &lt;群组&gt;][-G &lt;群组&gt;][-s &lt;shell&gt;][-u &lt;uid&gt;][用户帐号]<br></code></pre></td></tr></table></figure><ul><li><code>-c&lt;备注&gt;</code>:加上备注文字。备注文字会保存在passwd的备注栏位中。</li><li><code>-d&lt;登入目录&gt;</code>:指定用户登入时的起始目录。</li><li><code>-D</code>:变更预设值．</li><li><code>-e&lt;有效期限&gt;</code>:指定帐号的有效期限。</li><li><code>-f&lt;缓冲天数&gt;</code>:指定在密码过期后多少天即关闭该帐号。</li><li><code>-g&lt;群组&gt;</code>:指定用户所属的群组。</li><li><code>-G&lt;群组&gt;</code>:指定用户所属的附加群组。</li><li><code>-m</code>:制定用户的登入目录。</li><li><code>-M</code>:不要自动建立用户的登入目录。</li><li><code>-n</code>:取消建立以用户名称为名的群组．</li><li><code>-r</code>:建立系统帐号。</li><li><code>-s&lt;shell&gt;</code>:指定用户登入后所使用的shell。</li><li><code>-u&lt;uid&gt;</code>:指定用户ID。</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 举个栗子</span><br>sudo useradd -s /bin/bash -d /opt/stack -m stack<br><span class="hljs-comment"># 使用 bash 作为 shell，指定 /opt/stack 作为起始目录，指定登入目录为 stack</span><br></code></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 新建用户</span><br>sudo useradd zzz<br><span class="hljs-comment"># 将 zzz 添加到 fw 组</span><br>sudo usermod -aG fw zzz<br><span class="hljs-comment"># 设置密码</span><br>sudo passwd zzz<br><span class="hljs-comment"># 添加家目录</span><br><span class="hljs-built_in">mkdir</span> /home/zzz<br><span class="hljs-built_in">chown</span> zzz -R /home/zzz<br>usermod -d /home/zzz zzz<br><span class="hljs-comment"># 修改 zhaozhaozhao 为 zzz</span><br>sudo usermod -l zzz zhapzhaozhao<br><span class="hljs-comment"># 查看用户属于的用户组</span><br><span class="hljs-built_in">groups</span> zzz<br><span class="hljs-comment"># 删除 zhaozhaozhao 这个用户组</span><br>sudo groupdel zhaozhaozhao<br><span class="hljs-comment"># 查看所有用户及其家目录,  确认自己的家目录是否正确</span><br><span class="hljs-built_in">cat</span> /etc/passwd<br></code></pre></td></tr></table></figure><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/u011068702/article/details/70244713">https://blog.csdn.net/u011068702/article/details/70244713</a></p><p><a href="https://www.runoob.com/linux/linux-comm-useradd.html">https://www.runoob.com/linux/linux-comm-useradd.html</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>JS解构赋值</title>
+    <link href="/2023/05/11/JS%20%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC/"/>
+    <url>/2023/05/11/JS%20%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC/</url>
+    
+    <content type="html"><![CDATA[<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><p>JavaScript 中最常见的两种数据结构是 Object 和 Array。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JavaScript</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JS 箭头函数</title>
     <link href="/2023/05/10/JS%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
     <url>/2023/05/10/JS%20%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/</url>
