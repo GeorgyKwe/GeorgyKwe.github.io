@@ -24,7 +24,7 @@
 <meta property="og:description" content="Linux 常用命令系统监视器启动 Linux 资源管理器。 123gnome-system-monitor# 若没有安装，则使用下面命令安装sudo apt-get install gnome-system-monitor  pip 安装1sudo apt install python3-pip  useradd 命令useradd 命令用于建立用户帐号。帐号建好之后，再用 passwd 设定帐">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-29T05:42:40.000Z">
-<meta property="article:modified_time" content="2023-05-30T11:51:20.572Z">
+<meta property="article:modified_time" content="2023-06-05T03:09:48.711Z">
 <meta property="article:author" content="GeorgyKwe">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.4k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -300,6 +300,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 举个栗子</span><br>sudo useradd -s /bin/bash -d /opt/stack -m stack<br><span class="hljs-comment"># 使用 bash 作为 shell，指定 /opt/stack 作为起始目录，指定登入目录为 stack</span><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 新建用户</span><br>sudo useradd zzz<br><span class="hljs-comment"># 将 zzz 添加到 fw 组</span><br>sudo usermod -aG fw zzz<br><span class="hljs-comment"># 设置密码</span><br>sudo passwd zzz<br><span class="hljs-comment"># 添加家目录</span><br><span class="hljs-built_in">mkdir</span> /home/zzz<br><span class="hljs-built_in">chown</span> zzz -R /home/zzz<br>usermod -d /home/zzz zzz<br><span class="hljs-comment"># 修改 zhaozhaozhao 为 zzz</span><br>sudo usermod -l zzz zhapzhaozhao<br><span class="hljs-comment"># 查看用户属于的用户组</span><br><span class="hljs-built_in">groups</span> zzz<br><span class="hljs-comment"># 删除 zhaozhaozhao 这个用户组</span><br>sudo groupdel zhaozhaozhao<br><span class="hljs-comment"># 查看所有用户及其家目录,  确认自己的家目录是否正确</span><br><span class="hljs-built_in">cat</span> /etc/passwd<br></code></pre></td></tr></table></figure>
+
+<h3 id="uname"><a href="#uname" class="headerlink" title="uname"></a>uname</h3><p>查看 Linux 系统是 X86 架构还是 ARM 架构。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uname</span> -m<br><span class="hljs-comment"># x86_64</span><br><span class="hljs-comment"># (base) </span><br><span class="hljs-built_in">uname</span> -a<br><span class="hljs-comment"># Linux user-QiTianM437-A631 5.19.0-41-generic #42~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 18 17:40:00 UTC 2 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="hljs-comment"># (base) </span><br></code></pre></td></tr></table></figure>
 
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011068702/article/details/70244713">https://blog.csdn.net/u011068702/article/details/70244713</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-useradd.html">https://www.runoob.com/linux/linux-comm-useradd.html</a></p>
