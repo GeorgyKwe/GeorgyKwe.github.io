@@ -38,7 +38,6 @@
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE6.1.png">
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE6.2.png">
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE7.2.png">
-<meta property="og:image" content="http://example.com/2023/08/23/image/c_pic/%E5%9B%BE7.3.png">
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE9.1.png">
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE9.2.png">
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE9.3.png">
@@ -47,7 +46,7 @@
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE9.6.png">
 <meta property="og:image" content="http://example.com/image/c_pic/%E5%9B%BE11.1.gif">
 <meta property="article:published_time" content="2023-08-23T09:23:28.000Z">
-<meta property="article:modified_time" content="2023-08-23T09:32:57.860Z">
+<meta property="article:modified_time" content="2023-08-23T13:19:35.640Z">
 <meta property="article:author" content="GeorgyKwe">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -321,7 +320,7 @@
 <p>程序是保存在硬盘中的，要载入内存才能运行，<strong>CPU</strong> 也被设计为只能从内存中读取数据和指令。</p>
 <h2 id="1-程序在内存运行"><a href="#1-程序在内存运行" class="headerlink" title="1 程序在内存运行"></a>1 程序在内存运行</h2><p>对于 <strong>CPU</strong> 来说，内存仅仅是一个存放指令和数据的地方，并不能在内存中完成计算功能，例如要计算 <code>a = b + c</code>，必须将 <code>a、b、c</code> 都读取到 <strong>CPU</strong> 内部才能进行加法运算。为了了解具体的运算过程，先来看下 <strong>CPU</strong> 的结构。</p>
 <p><strong>CPU</strong> 是一个复杂的计算机部件，它内部又包含很多小零件，如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE1.1.png" srcset="/img/loading.gif" lazyload alt="图1.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE1.1.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li><p>运算单元是 <strong>CPU</strong> 的大脑，负责加减乘除、比较、位移等运算工作，每种运算都有对应的电路支持，速度很快。</p>
 </li>
@@ -370,7 +369,7 @@
 <p>代码中的 <strong>a、b</strong> 是全局变量，它们的内存地址在链接时就已经决定，以后再也不能改变，该程序无论在何时运行，结果都是一样的。</p>
 <p><strong>Q：</strong>如果物理内存中的这两个地址被其他程序占用了怎么办，此时程序是不是无法运行了？</p>
 <p>如下图所示，这些内存地址都是假的，不是真实的物理内存地址，而是虚拟地址。虚拟地址通过 <strong>CPU</strong> 的转换才能对应到物理地址，而且每次程序运行时，操作系统都会重新安排虚拟地址和物理地址的对应关系，哪一段物理内存空闲就使用哪一段。</p>
-<p><img src="/../image/c_pic/%E5%9B%BE2.1.png" srcset="/img/loading.gif" lazyload alt="图2.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE2.1.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="2-1-虚拟地址"><a href="#2-1-虚拟地址" class="headerlink" title="2.1 虚拟地址"></a>2.1 虚拟地址</h3><p>把程序给出的地址看做是一种虚拟地址 <strong>（Virtual Address）</strong>，然后通过某些映射的方法，将这个虚拟地址转换成实际的物理地址。只要能够妥善地控制这个虚拟地址到物理地址的映射过程，就可以保证程序每次运行时都可以使用相同的地址。</p>
 <p>例如，上面代码中变量 <strong>a</strong> 的地址是 <strong>590f5c4</strong>，第一次运行时它对应的物理内存地址可能是 <strong>0X12ED90AA</strong>，第二次运行时可能又对应 <strong>0XED90</strong>，而程序则不需要关心这些，这些繁杂的内存管理工作交给操作系统处理即可。</p>
 <p>回到程序的运行本质上来看，用户程序在运行时不希望介入到这些复杂的内存管理过程中，作为普通的程序，它需要的是一个简单的执行环境，有自己的内存，有自己的 <strong>CPU</strong>，好像整个程序占有整个计算机而不用关心其他的程序。</p>
@@ -420,7 +419,7 @@
 <h2 id="4-内存分页机制"><a href="#4-内存分页机制" class="headerlink" title="4 内存分页机制"></a>4 内存分页机制</h2><p>关于虚拟地址和物理地址的映射有很多思路，假设以程序为单位，把一段与程序运行所需要的同等大小的虚拟空间映射到某段物理空间。</p>
 <p>例如程序 <strong>A</strong> 需要 <strong>10MB</strong> 内存，虚拟地址的范围是从 <strong>0X00000000</strong> 到 <strong>0X00A00000</strong>，假设它被映射到一段同等大小的物理内存，地址范围从 <strong>0X00100000</strong> 到 <strong>0X00B00000</strong>，即虚拟空间中的每一个字节对应于物理空间中的每一个字节。</p>
 <p>程序运行时，它们的对应关系如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE4.1.png" srcset="/img/loading.gif" lazyload alt="图4.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE4.1.png" srcset="/img/loading.gif" lazyload></p>
 <p>当程序 <strong>A</strong> 需要访问 <strong>0X00001000</strong> 时，系统会将这个虚拟地址转换成实际的物理地址 <strong>0X00101000</strong>，访问 <strong>0X002E0000</strong> 时，转换成 <strong>0X003E0000</strong>，以此类推。</p>
 <p>这种以整个程序为单位的方法很好地解决了不同程序地址不隔离的问题，同时也能够在程序中使用固定的地址。</p>
 <ul>
@@ -448,7 +447,7 @@
 <h4 id="4-1-1-关于页的大小"><a href="#4-1-1-关于页的大小" class="headerlink" title="4.1.1 关于页的大小"></a>4.1.1 关于页的大小</h4><p>页的大小是固定的，由硬件决定，或硬件支持多种大小的页，由操作系统选择决定页的大小。比如 <strong>Intel Pentium</strong> 系列处理器支持 <strong>4KB</strong> 或 <strong>4MB</strong> 的页大小，那么操作系统可以选择每页大小为 <strong>4KB</strong>，也可以选择每页大小为 <strong>4MB</strong>，但是在同一时刻只能选择一种大小，所以对整个系统来说，也就是固定大小。</p>
 <p>目前几乎所有 <strong>PC</strong> 上的操作系统都是用 <strong>4KB</strong> 大小的页。假设使用的 <strong>PC</strong> 机是 <strong>32</strong> 位的，那么虚拟地址空间总共有 <strong>4GB</strong>，按照 <strong>4KB</strong> 每页分的话，总共有 <strong>2^32 &#x2F; 2^12 &#x3D; 2^20 &#x3D; 1M &#x3D; 1048576</strong> 个页；物理内存也是同样的分法。</p>
 <h3 id="4-2-根据页进行映射"><a href="#4-2-根据页进行映射" class="headerlink" title="4.2 根据页进行映射"></a>4.2 根据页进行映射</h3><p>下面通过一个简单的例子来说明虚拟地址是如何根据页来映射到物理地址的，(虚拟空间、物理空间和磁盘之间的页映射关系)</p>
-<p><img src="/../image/c_pic/%E5%9B%BE4.2.png" srcset="/img/loading.gif" lazyload alt="图4.2"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE4.2.png" srcset="/img/loading.gif" lazyload></p>
 <p>程序1和程序2的虚拟空间都有 <strong>8</strong> 个页，为了方便说明问题，假设每页大小为 <strong>1KB</strong>，那么虚拟地址空间就是 <strong>8KB</strong>。假设计算机有 <strong>13</strong> 条地址线，即拥有 <strong>2^13</strong> 的物理寻址能力，那么理论上物理空间可以多达 <strong>8KB</strong>。但是出于种种原因，购买内存的资金不够，只买得起 <strong>6KB</strong> 的内存，所以物理空间真正有效的只是前 <strong>6KB</strong>。</p>
 <p>当把程序的虚拟空间按页分隔后，把常用的数据和代码页加载到内存中，把不常用的暂时留在磁盘中，当需要用到的时候再从磁盘中读取。上图中，假设有两个程序 <strong>Program 1</strong> 和 <strong>Program 2</strong>，它们的部分虚拟页面被映射到物理页面，比如 <strong>Program 1</strong> 的 <strong>VP0</strong>、<strong>VP1</strong> 和 <strong>VP7</strong> 分别被映射到 <strong>PP0</strong>、<strong>PP2</strong> 和 <strong>PP3</strong>；而有部分却留在磁盘中，比如 <strong>VP2</strong>、<strong>VP3</strong> 分别位于磁盘的 <strong>DP0</strong>、<strong>DP1</strong>中；另外还有一些页面如 <strong>VP4</strong>、<strong>VP5</strong>、<strong>VP6</strong> 可能尚未被用到或者访问到，它们暂时处于未使用状态。</p>
 <blockquote>
@@ -456,14 +455,14 @@
 </blockquote>
 <p><strong>Program 1</strong> 的 <strong>VP2</strong>、<strong>VP3</strong> 不在内存中，但是当进程需要用到这两个页的时候，硬件会捕获到这个消息，就是所谓的页错误（<strong>Page Fault</strong>），然后操作系统接管进程，负责将 <strong>VP2</strong> 和 <strong>PV3</strong> 从磁盘中读取出来并且装入内存，然后将内存中的这两个页与 <strong>VP2</strong>、<strong>VP3</strong> 之间建立映射关系。</p>
 <h2 id="5-分页机制实现"><a href="#5-分页机制实现" class="headerlink" title="5 分页机制实现"></a>5 分页机制实现</h2><p>现代操作系统都使用分页机制来管理内存，这使得每个程序都拥有自己的地址空间。每当程序使用虚拟地址进行读写时，都必须转换为实际的物理地址，才能真正在内存条上定位数据。如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE13.1.png" srcset="/img/loading.gif" lazyload alt="图13.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE13.1.png" srcset="/img/loading.gif" lazyload></p>
 <p>内存地址的转换是通过一种叫做页表（<strong>Page Table</strong>）的机制来完成的，即：</p>
 <ul>
 <li>页表是什么？为什么要采用页表机制，而不采用其他机制？</li>
 <li>虚拟地址如何通过页表转换为物理地址？</li>
 </ul>
 <h3 id="5-1-直接使用数组转换"><a href="#5-1-直接使用数组转换" class="headerlink" title="5.1 直接使用数组转换"></a>5.1 直接使用数组转换</h3><p>最容易想到的映射方案是使用数组：每个数组元素保存一个物理地址，而把虚拟地址作为数组下标，这样就能够很容易地完成映射，并且效率不低。如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE13.2.png" srcset="/img/loading.gif" lazyload alt="图13.2"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE13.2.png" srcset="/img/loading.gif" lazyload></p>
 <p>但是这样的数组有 <strong>2^32</strong> 个元素，每个元素大小为 <strong>4</strong> 个字节，总共占用 <strong>16GB</strong> 的内存，显现是不现实的！ </p>
 <h3 id="5-2-使用一级页表"><a href="#5-2-使用一级页表" class="headerlink" title="5.2 使用一级页表"></a>5.2 使用一级页表</h3><p>既然内存是分页的，能够定位到数据所在的页，以及它在页内的偏移（也就是距离页开头的字节数），就能够转换为物理地址。例如，一个 <strong>int</strong> 类型的值保存在第 <strong>12</strong> 页，页内偏移为 <strong>240</strong>，那么对应的物理地址就是 <code>2^12 * 12 + 240 = 49392</code>。</p>
 <blockquote>
@@ -471,12 +470,12 @@
 </blockquote>
 <p>虚拟地址空间大小为 <strong>4GB</strong>，总共包含 <code>2^32/2^12 = 2^20 = 1K*1K = 1M = 1048576</code> 个页面，可以定义一个这样的数组：它包含 <strong>2^20 &#x3D; 1M</strong> 个元素，每个元素的值为页面编号（也就是位于第几个页面），长度为 <strong>4</strong> 字节，整个数组共占用 <strong>4MB</strong> 的内存空间。这样的数组就称为页表（<strong>Page Table</strong>），它记录了地址空间中所有页的编号。</p>
 <p>虚拟地址长度为 <strong>32</strong> 位，不妨进行一下切割，将高 <strong>20</strong> 位作为页表数组的下标，低 <strong>12</strong> 位作为页内偏移。如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE13.3.png" srcset="/img/loading.gif" lazyload alt="图13.3"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE13.3.png" srcset="/img/loading.gif" lazyload></p>
 <p>为什么要这样切割呢？因为页表数组共有 <code>2^20 = 1M</code> 个元素，使用虚拟地址的高 <strong>20</strong> 位作为下标，正好能够访问数组中的所有元素；并且，一个页面的大小为 <code>2^12 = 4KB</code>，使用虚拟地址的低 <strong>12</strong> 位恰好能够表示所有偏移。</p>
 <p>注意，表示页面编号只需要 <strong>20</strong> 位，而页表数组的每个元素的长度却为 <strong>4</strong> 字节，即 <strong>32</strong> 位，多出 <code>32 - 20 = 12</code> 位。这 <strong>12</strong> 位也有很大的用处，可以用来表示当前页的相关属性，例如是否有读写权限、是否已经分配物理内存、是否被换出到硬盘等。</p>
 <p>例如一个虚拟地址 <strong>0XA010BA01</strong>，它的高 <strong>20</strong> 位是 <strong>0XA010B</strong>，所以需要访问页表数组的第 <strong>0XA010B</strong> 个元素，才能找到数据所在的物理页面。假设页表数组第 <strong>0XA010B</strong> 个元素的值为 <strong>0X0F70AAA0</strong>，它的高 <strong>20</strong> 位为 <strong>0X0F70A</strong>，那么就可以确定数据位于第 <strong>0X0F70A</strong> 个物理页面。再来看虚拟地址，它的低 <strong>12</strong> 位是 0XA01，所以页内偏移也是 <strong>0XA01</strong>。有了页面索引和页内偏移，就可以算出物理地址了。经过计算，最终的物理地址为 <code>0X0F70A * 2^12 + 0XA01 = 0X0F70A000 + 0XA01 = 0X0F70AA01</code>。</p>
 <p>这种思路所形成的映射关系如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE13.4.png" srcset="/img/loading.gif" lazyload alt="图13.4"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE13.4.png" srcset="/img/loading.gif" lazyload></p>
 <p>可以发现，有的页被映射到物理内存，有的被映射到硬盘，不同的映射方式可以由页表数组元素的低 <strong>12</strong> 位来控制。</p>
 <p>使用这种方案，不管程序占用多大的内存，都要为页表数组分配 <strong>4M</strong> 的内存空间（页表数组也必须放在物理内存中），因为虚拟地址空间中的高 <strong>1G</strong> 或 <strong>2G</strong> 是被系统占用的，必须保证较大的数组下标有效。</p>
 <p>现在硬件很便宜了，内存容量大了，很多电脑都配备 <strong>4G</strong> 或 <strong>8G</strong> 的内存，页表数组占用 <strong>4M</strong> 内存或许不觉得多，但在 <strong>32</strong> 位系统刚刚发布的时候，内存还是很紧缺的资源，很多电脑才配备 <strong>100M</strong> 甚至几十兆的内存，<strong>4M</strong> 内存就显得有点大了，所以还得对上面的方案进行改进，压缩页表数组所占用的内存。</p>
@@ -485,11 +484,11 @@
 <p><strong>1024</strong> 个页表有 <strong>1024</strong> 个索引，所以不能用一个指针指向它们，必须将这些索引再保存到一个额外的数组中。这个额外的数组有 <strong>1024</strong> 个元素，每个元素记录一个页表所在物理页的编号，长度为 <strong>4</strong> 个字节，总共占用 <strong>4KB</strong> 的内存。将这个额外的数组称为页目录（<strong>Page Directory</strong>），因为它的每一个元素对应一个页表。</p>
 <p>如此，只要使用一个指针来记住页目录的地址即可，等到进行地址转换时，可以根据这个指针找到页目录，再根据页目录找到页表，最后找到物理地址，前后共经过 <strong>3</strong> 次间接转换。</p>
 <p>那么，如何根据虚拟地址找到页目录和页表中相应的元素呢？不妨将虚拟地址分割为三分部，高 <strong>10</strong> 位作为页目录中元素的下标，中间 <strong>10</strong> 位作为页表中元素的下标，最后 <strong>12</strong> 位作为页内偏移，如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE13.5.png" srcset="/img/loading.gif" lazyload alt="图13.5"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE13.5.png" srcset="/img/loading.gif" lazyload></p>
 <p>知道了物理页的索引和页内偏移就可以转换为物理地址了，在这种方案中，页内偏移可以从虚拟地址的低 <strong>12</strong> 位得到，但是物理页索引却保存在 <strong>1024</strong> 个分散的小页表中，所以就必须先根据页目录找到对应的页表，再根据页表找到物理页索引。</p>
 <p>例如一个虚拟地址 <strong>0011000101  1010001100  111100001010</strong>，它的高10位为 <strong>0011000101</strong>，对应页目录中的第 <strong>0011000101</strong> 个元素，假设该元素的高 <strong>20</strong> 位为 <strong>0XF012A</strong>，也即对应的页表在物理内存中的编号为 <strong>0XF012A</strong>，这样就找到了页表。虚拟地址中间 <strong>10</strong> 位为 <strong>1010001100</strong>，它对应页表中的第 <strong>1010001100</strong> 个元素，假设该元素的高 <strong>20</strong> 位为 <strong>0X00D20</strong>，也即物理页的索引为 <strong>0X00D20</strong>。通过计算，最终的物理地址为 <code>0X00D20 * 2^12 + 111100001010 = 0X00D20F0A</code>。</p>
 <p>这种思路所形成的映射关系如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE13.6.png" srcset="/img/loading.gif" lazyload alt="图13.6"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE13.6.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>图中的点状虚线说明了最终的映射关系。图中没有考虑映射到硬盘的情况。</p>
 </blockquote>
@@ -500,7 +499,7 @@
 <h2 id="6-内存对齐"><a href="#6-内存对齐" class="headerlink" title="6 内存对齐"></a>6 内存对齐</h2><p>计算机内存是以字节（<strong>Byte</strong>）为单位划分的，理论上 <strong>CPU</strong> 可以访问任意编号的字节，但实际情况并非如此。</p>
 <p><strong>CPU</strong> 通过地址总线来访问内存，一次能处理几个字节的数据，就命令地址总线读取几个字节的数据。<strong>32</strong> 位的 <strong>CPU</strong> 一次可以处理 <strong>4</strong> 个字节的数据，那么每次就从内存读取 <strong>4</strong> 个字节的数据；少了浪费主频，多了没有用。<strong>64</strong> 位的处理器也是这个道理，每次读取8个字节。</p>
 <p>以 <strong>32</strong> 位的 <strong>CPU</strong> 为例，实际寻址的步长为 <strong>4</strong> 个字节，也就是只对编号为 <strong>4</strong> 的倍数的内存寻址，例如 <strong>0、4、8、12、1000</strong> 等，而不会对编号为 <strong>1、3、11、1001</strong> 的内存寻址。</p>
-<p><img src="/../image/c_pic/%E5%9B%BE5.1.png" srcset="/img/loading.gif" lazyload alt="图5.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE5.1.png" srcset="/img/loading.gif" lazyload></p>
 <p>这样做可以以最快的速度寻址：不遗漏一个字节，也不重复对一个字节寻址。</p>
 <p>对程序来说，一个变量最好位于一个寻址步长的范围内，这样一次就可以读取到变量的值；如果跨步长存储，就需要读取两次，然后再拼接数据，效率显然降低。</p>
 <p>例如一个 <strong>int</strong> 类型的数据，如果地址为 <strong>8</strong>，那么很好办，对编号为 <strong>8</strong> 的内存寻址一次就可以。如果编号为 <strong>10</strong>，就比较麻烦，<strong>CPU</strong> 需要先对编号为 <strong>8</strong> 的内存寻址，读取 <strong>4</strong> 个字节，得到该数据的前半部分，然后再对编号为 <strong>12</strong> 的内存寻址，读取 <strong>4</strong> 个字节，得到该数据的后半部分，再将这两部分拼接起来，才能取得数据的值。</p>
@@ -528,13 +527,13 @@
 <p>栈内存由系统自动分配和释放：发生函数调用时就为函数运行时用到的数据分配内存，函数调用结束后就将之前分配的内存全部销毁。所以局部变量、参数只在当前函数中有效，不能传递到函数外部。</p>
 <h3 id="7-1-栈的概念"><a href="#7-1-栈的概念" class="headerlink" title="7.1 栈的概念"></a>7.1 栈的概念</h3><p>在计算机中，栈可以理解为一个特殊的容器，用户可以将数据依次放入栈中，然后再将数据按照相反的顺序从栈中取出。也就是说，先放入的数据最后才能取出，而最后放入的数据必须先取出。这称为先进后出（<strong>First In Last Out</strong>）原则。</p>
 <p>放入数据常称为入栈或压栈（<strong>Push</strong>），取出数据常称为出栈或弹出（<strong>Pop</strong>）。如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE6.1.png" srcset="/img/loading.gif" lazyload alt="图6.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE6.1.png" srcset="/img/loading.gif" lazyload></p>
 <p>可以发现，栈底始终不动，出栈入栈只是在移动栈顶，当栈中没有数据时，栈顶和栈底重合。</p>
 <blockquote>
 <p>从本质上来讲，栈是一段连续的内存，需要同时记录栈底和栈顶，才能对当前的栈进行定位。在现代计算机中，通常使用 <strong>ebp</strong> 寄存器指向栈底，而使用 <strong>esp</strong> 寄存器指向栈顶。随着数据的进栈出栈，<strong>esp</strong> 的值会不断变化，进栈时 <strong>esp</strong> 的值减小，出栈时 <strong>esp</strong> 的值增大。</p>
 </blockquote>
 <p><strong>ebp</strong> 和 <strong>esp</strong> 都是 <strong>CPU</strong> 中的寄存器：<strong>ebp</strong> 是 <strong>Extend Base Pointer</strong> 的缩写，通常用来指向栈底；<strong>esp</strong> 是 <strong>Extend Stack Pointer</strong> 的缩写，通常用来指向栈顶。<br>如下图所示是一个栈的实例：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE6.2.png" srcset="/img/loading.gif" lazyload alt="图6.2"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE6.2.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="7-2-栈的大小以及栈溢出"><a href="#7-2-栈的大小以及栈溢出" class="headerlink" title="7.2 栈的大小以及栈溢出"></a>7.2 栈的大小以及栈溢出</h3><p>对每个程序来说，栈能使用的内存是有限的，一般是 <strong>1M~8M</strong>，这在编译时就已经决定了，程序运行期间不能再改变。如果程序使用的栈内存超出最大值，就会发生栈溢出（<strong>Stack Overflow</strong>）错误。</p>
 <blockquote>
 <p>一个程序可以包含多个线程，每个线程都有自己的栈，严格来说，栈的最大值是针对线程来说的，而不是针对程序。</p>
@@ -552,7 +551,7 @@
 <ul>
 <li><code>main()</code> 函数的栈:</li>
 </ul>
-<p><img src="/../image/c_pic/%E5%9B%BE7.2.png" srcset="/img/loading.gif" lazyload alt="图7.2"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE7.2.png" srcset="/img/loading.gif" lazyload></p>
 <p>局部数组也是在栈上分配内存，当输入 <code>&quot;12345678901234567890&quot;</code>  时，会发生数组溢出，占用 <code>“4 字节空白内存”</code>、<code>“old ebp”</code> 和 <code>“返回地址”</code> 所在的内存，并将原有的数据覆盖掉，这样当 <code>main()</code> 函数执行完成后，会取得一个错误的返回地址，该地址上的指令是不确定的，或者根本就没有指令，所以程序在返回时出错。</p>
 <p><strong>C</strong> 语言不会对数组溢出做检测，这是一个典型的由于数组溢出导致覆盖了函数返回地址的例子，将这样的错误称为 <code>“栈溢出错误”</code>。</p>
 <blockquote>
@@ -560,8 +559,6 @@
 </blockquote>
 <p>下面是使用 <code>strcpy()</code> 函数导致栈溢出的例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">char</span> *str1 = <span class="hljs-string">&quot;梓语慕晓梓语慕晓&quot;</span>;<br>    <span class="hljs-type">char</span> str2[<span class="hljs-number">6</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-built_in">strcpy</span>(str2, str1);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;str:%s\n&quot;</span>, str2);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<img src="../image/c_pic/图7.3.png" srcset="/img/loading.gif" lazyload alt="图7.3" style="zoom:80%;" />
 
 <p>将 <strong>str1</strong> 复制到 <strong>str2</strong>，显然超出了 <strong>str2</strong> 的接受范围，会发生溢出，覆盖返回地址，导致 <code>main()</code> 函数返回时出错。</p>
 <p>栈溢出一般不会产生严重的后果，但是如果有用户精心构造栈溢出，让返回地址指向恶意代码，那就比较危险了，这就是常说的栈溢出攻击。</p>
@@ -622,30 +619,30 @@
 <ul>
 <li>已分配内存和空闲内存相间出现</li>
 </ul>
-<p><img src="/../image/c_pic/%E5%9B%BE9.1.png" srcset="/img/loading.gif" lazyload alt="图9.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE9.1.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>带阴影的方框是已被分配的内存，白色方框是空闲内存或已被释放的内存。程序需要内存时，<code>malloc()</code> 首先遍历空闲区域，看是否有大小合适的内存块，如果有，就分配，如果没有，就向操作系统申请（发生系统调用）。为了保证分配给程序的内存的连续性，<code>malloc()</code> 只会在一个空闲区域中分配，而不能将多个空闲区域联合起来。</p>
 </blockquote>
 <p>内存块（包括已分配和空闲的）的结构类似于链表，它们之间通过指针连接在一起。在实际应用中，一个内存块的结构如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE9.2.png" srcset="/img/loading.gif" lazyload alt="图9.2"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE9.2.png" srcset="/img/loading.gif" lazyload></p>
 <p><strong>next</strong> 是指针，指向下一个内存块，<strong>used</strong> 用来表示当前内存块是否已被使用。这样，整个堆区就会形成如下图所示的链表：</p>
 <ul>
 <li>类似链表的内存管理方式</li>
 </ul>
-<p><img src="/../image/c_pic/%E5%9B%BE9.3.png" srcset="/img/loading.gif" lazyload alt="图9.3"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE9.3.png" srcset="/img/loading.gif" lazyload></p>
 <p>现在假设需要为程序分配 <strong>100</strong> 个字节的内存，当搜索到图中第一个空闲区域（大小为 <strong>200</strong> 个字节）时，发现满足条件，那么就在这里分配。这时候 <code>malloc()</code> 会把第一个空闲区域拆分成两部分，一部分交给程序使用，剩下的部分任然空闲，如下图所示：</p>
 <ul>
 <li>为程序分配 <strong>100</strong> 个字节的内存</li>
 </ul>
-<p><img src="/../image/c_pic/%E5%9B%BE9.4.png" srcset="/img/loading.gif" lazyload alt="图9.4"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE9.4.png" srcset="/img/loading.gif" lazyload></p>
 <p>仍然以图 3 为例，当程序释放掉第三个内存块时，就会形成新的空闲区域，<code>free()</code> 会将第二、三、四个连续的空闲区域合并为一个，如下图所示：</p>
 <ul>
 <li>释放第三个内存块</li>
 </ul>
-<p><img src="/../image/c_pic/%E5%9B%BE9.5.png" srcset="/img/loading.gif" lazyload alt="图9.5"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE9.5.png" srcset="/img/loading.gif" lazyload></p>
 <p>可以看到，<code>malloc()</code> 和 <code>free()</code> 所做的工作主要是对已有内存块的分拆和合并，并没有频繁地向操作系统申请内存，这大大提高了内存分配的效率。</p>
 <p>另外，由于单向链表只能向一个方向搜索，在合并或拆分内存块时不方便，所以大部分 <code>malloc()</code> 实现都会在内存块中增加一个 <strong>pre</strong> 指针指向上一个内存块，构成双向链表，如下图所示：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE9.6.png" srcset="/img/loading.gif" lazyload alt="图8.6"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE9.6.png" srcset="/img/loading.gif" lazyload></p>
 <p>链表是一种经典的堆内存管理方式，经常被用在教学中，很多 <strong>C</strong> 语言教程都会提到“栈内存的分配类似于数据结构中的栈，而堆内存的分配却类似于数据结构中的链表”就是源于此。</p>
 <p>链表式内存管理虽然思路简单，容易理解，但存在很多问题，例如：</p>
 <ul>
@@ -734,7 +731,7 @@
 <p>为了解决这个问题，可以将使用频繁的变量放在 <strong>CPU</strong> 的通用寄存器中，这样使用该变量时就不必访问内存，直接从寄存器中读取，大大提高程序的运行效率。</p>
 <p>不过寄存器的数量是有限的，通常是把使用最频繁的变量定义为 register 的。</p>
 <p>来看一个计算 <strong>π</strong> 的近似值的例子，求解的一个近似公式如下：</p>
-<p><img src="/../image/c_pic/%E5%9B%BE11.1.gif" srcset="/img/loading.gif" lazyload alt="图11.1"></p>
+<p><img src="/../image/c_pic/%E5%9B%BE11.1.gif" srcset="/img/loading.gif" lazyload></p>
 <p>为了提高精度，循环的次数越多越好，可以将循环的增量控制定义为寄存器变量，如下所示：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;conio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-keyword">register</span> <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>	<span class="hljs-type">double</span> sign = <span class="hljs-number">1.0</span>, res = <span class="hljs-number">0</span>, ad = <span class="hljs-number">1.0</span>;<br>	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100000000</span>; i++)&#123;<br>		res += ad;<br>		sign =- sign;<br>		ad = sign/(<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>);<br>	&#125;<br>	res *= <span class="hljs-number">4</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;pi is %f&quot;</span>, res);<br>	getch();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">/* 输出结果 */</span><br>pi is <span class="hljs-number">3.141593</span><br></code></pre></td></tr></table></figure>
 
