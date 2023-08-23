@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>SRAM、DRAM、PSRAM简介.md</title>
+    <link href="/2023/08/22/SRAM%E3%80%81DRAM%E3%80%81PSRAM%E7%AE%80%E4%BB%8B/"/>
+    <url>/2023/08/22/SRAM%E3%80%81DRAM%E3%80%81PSRAM%E7%AE%80%E4%BB%8B/</url>
+    
+    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>计算机中一般包含 ROM、RAM、硬盘、光盘以及附带驱动器等。</p><h2 id="常用存储器分类"><a href="#常用存储器分类" class="headerlink" title="常用存储器分类"></a>常用存储器分类</h2><h3 id="数据易失性存储器"><a href="#数据易失性存储器" class="headerlink" title="数据易失性存储器"></a>数据易失性存储器</h3><p>数据易失性存储器，如 DRAM（Dynamic RAM：动态 RAM）、SRAM（Static RAM：静态 RAM），这类存储器读写速度较快，但掉电后数据会丢失，在 SoC 设计中通常被用作数据缓存、程序缓存；</p><h3 id="数据非易失性存储器"><a href="#数据非易失性存储器" class="headerlink" title="数据非易失性存储器"></a>数据非易失性存储器</h3><p>数据非易失性存储器，如 NAND、NOR Flash，这类存储器读写速度比较慢，但掉电后数据不会丢失，因此在 SoC 设计中可用作大数据的存储或程序的存储；</p><h3 id="新出现存储器"><a href="#新出现存储器" class="headerlink" title="新出现存储器"></a>新出现存储器</h3><p>新出现存储器，如 PSRAM（Pseudo SRAM）：伪静态随机存取器。具有 SRAM 的接口协议：给出地址、读写指令，就可实现数据存取；相比于 DRAM 的实现，不需要复杂的 Memory Controller 来控制内存单元去定期刷新数据，但它的内核架构确实 DRAM 架构；传统 SRAM 是由 6 个晶体管构成一个存储 Cell，而 PSRAM 是由 1个晶体管 + 1 个电容构成一个存储 Cell，因此 SPRAM 可以实现较大的存储容量。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>存储器</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于Ubuntu部署多节点k8s集群</title>
     <link href="/2023/08/11/%E5%9F%BA%E4%BA%8EUbuntu%E9%83%A8%E7%BD%B2%E5%A4%9A%E8%8A%82%E7%82%B9k8s%E9%9B%86%E7%BE%A4/"/>
     <url>/2023/08/11/%E5%9F%BA%E4%BA%8EUbuntu%E9%83%A8%E7%BD%B2%E5%A4%9A%E8%8A%82%E7%82%B9k8s%E9%9B%86%E7%BE%A4/</url>
