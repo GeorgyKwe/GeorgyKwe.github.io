@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>单工、半双工、全双工</title>
+    <link href="/2023/08/28/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E3%80%81%E5%85%A8%E5%8F%8C%E5%B7%A5/"/>
+    <url>/2023/08/28/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E3%80%81%E5%85%A8%E5%8F%8C%E5%B7%A5/</url>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>数据通信中，数据在线路上的传送方式可以分为单工通信、半双工通信、全双工通信三种。</p><h2 id="单工通信"><a href="#单工通信" class="headerlink" title="单工通信"></a>单工通信</h2><p>单工通信，是指消息只能单方面传输的工作方式，比如遥控、遥测，就是单工通信方式。</p><p>单工通信信道是单向信道，发送端和接收端的身份都是固定的，发送端只能发送消息，不能接收消息；接收端只能接收消息，不能发送消息，数据信号只能从一端传送到另一端，即信息流是单方向的。</p><h2 id="半双工通信"><a href="#半双工通信" class="headerlink" title="半双工通信"></a>半双工通信</h2><p>半双工通信，是指数据可以沿着两个方向传送，但同一时刻一个信道只允许单方向传送，因此又称为双向交替通信。若想改变传输方向，需由开关进行切换，比如无线对讲机就是一种半双工设备，同一时间内只允许一方讲话。</p><p>半双工方式要求收发双端都有发送装置和接收装置。由于半双工要频繁变换信道方向，因此效率较低，但可以节约传输线路。适用于终端与终端之间的会话式通信，方向转变通常由软件控制的电子开关来控制。</p><h2 id="全双工通信"><a href="#全双工通信" class="headerlink" title="全双工通信"></a>全双工通信</h2><p>全双工通信，是指通信的双方可以同时发送和接收信息的信息交互方式，比如电话、手机等。</p><p>全双工方式在通信系统的每一端都设置发送器和接收器，因此，能控制数据同时在两个方向上传送。全双工方式无需进行方向的切换，因此，没有切换操作所产生的时间延迟，这对那些不能有时间延误的交互式应用（例如远程监测和控制系统）十分有利。这种方式要求通讯双方均有发送器和接收器，同时，需要2根数据线传送数据信号。（可能还需要控制线和状态线，以及地线）。</p><h2 id="UART、SPI、I2C"><a href="#UART、SPI、I2C" class="headerlink" title="UART、SPI、I2C"></a>UART、SPI、I2C</h2><ul><li>UART：全双工、异步通信</li><li>USRT：全双工、同步通信</li><li>SPI：高速、全双工、同步的通信总线</li><li>I2C：半双工的通信总线</li></ul><h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul><li>Half Duplex Communication：半双工通信</li><li>Full Duplex Communication：全双工通信</li></ul><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/chaofanwei/article/details/13274815">https://blog.csdn.net/chaofanwei/article/details/13274815</a></p><p><a href="https://www.zhihu.com/question/39855658">https://www.zhihu.com/question/39855658</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据通信</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>I2C通信协议</title>
+    <link href="/2023/08/28/I2C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
+    <url>/2023/08/28/I2C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/</url>
+    
+    <content type="html"><![CDATA[<h2 id="I2C简介"><a href="#I2C简介" class="headerlink" title="I2C简介"></a>I2C简介</h2><p>I2C(Inter-Integrated Circuit)，是一种串行通信总线，用于连接微控制器及其外围设备，实现主控制器和从器件间的主从双向通信，是一种<strong>同步半双工</strong>通信(两端时钟频率一致，双向通信，但不能同时进行数据收发)。</p><p>对于硬件设计人员，只需要两个引脚，极少的连接线和面积，就可以实现芯片间的通讯；对于软件开发者，可以使用同一个 I2C 驱动库，来实现不同器件的驱动，大大减少了软件的开发时间。</p><p><img src="/../image/I2C_pic/I2C%E6%80%BB%E7%BA%BF%E4%B8%BE%E4%BE%8B.png"></p><h2 id="I2C原理"><a href="#I2C原理" class="headerlink" title="I2C原理"></a>I2C原理</h2><p>I2C 通信属于串行通信，具有两根串行信号线：数据线（SDA），时钟线（SCL）。主控制器和从设备（一个或多个）都通过两根信号线连接，信号线上的主设备和从设备都可以扮演发送器和接收器的角色。为确保传输过程的指向准确性，每个接到I2C总线上的设备都有唯一的地址（从器件专用地址码：可分为 7 位寻址和 10 位寻址），可实现指定从机的定向传输与群发传输。</p><p><img src="/../image/I2C_pic/I2C%E6%80%BB%E7%BA%BF%E7%89%A9%E6%8B%93%E6%89%91%E5%9B%BE.png"></p><p>主设备与从设备：</p><ul><li>通信由主设备发起和主导（调度总线），从设备按照 I2C 时序协议被动的接受主设备的通信；</li><li>主从设备由通信双方来决定（I2C 协议并无规定）；</li><li>同一时刻，只能有一个从设备和主设备通信，其它从设备处于“冬眠”状态。</li></ul><h3 id="信号类型"><a href="#信号类型" class="headerlink" title="信号类型"></a>信号类型</h3><p>为确保传输稳定，所有连接在同一 I2C 总线上的设备共用一个时钟。I2C 总线在传送数据过程中共有以下几种类型信号：</p><p>（1）开始信号&#x2F;结束信号</p><ul><li>SCL 为高电平时，SDA 由高电平向低电平跳变，开始传送数据；</li><li>SCL 为高电平时，SDA 由低电平向高电平跳变，结束传送数据；</li></ul><p><img src="/../image/I2C_pic/%E5%BC%80%E5%A7%8B%E5%92%8C%E7%BB%93%E6%9D%9F%E4%BF%A1%E5%8F%B7.png"></p><p>（2）应答信号&#x2F;非应答信号</p><ul><li>I2C 总线协议规定，每传送一个字节数据后（8bit），都要有一个应答信号以确认数据传送是否被对方收到。即一个字节传输的 8 个时钟过后的第 9 个时钟期间，接收器必须回复 ACK 应答信号给发送器，这样才能完成数据传输；</li><li>应答信号由接收设备产生，在 SCL 为高电平期间，接收设备将 SDA 拉低为低电平，表示数据传输正确，产生应答（ACK），SDA 拉高则表示数据传输失败，产生非应答位（NACK）；</li></ul><blockquote><p>中断模式与非中断模式：两种模式工作时序相同，非中断模式通过检测 ACK 信号来判断从设备响应，中断模式则根据中断信号来判断响应（<a href="https://www.runoob.com/w3cnote/verilog2-fifo.html">FIFO状态</a>）。</p></blockquote><p>（3）闲置状态&#x2F;被占用状态</p><ul><li>在主机发送起始信号后，且未发送终止信号期间，总线处于被占用状态；</li><li>发送终止信号后，总线处于闲置状态，SCL 和 SDA 同时为高电平；</li></ul><h3 id="总线读写流程"><a href="#总线读写流程" class="headerlink" title="总线读写流程"></a>总线读写流程</h3><p>I2C 总线进行数据传送时，SCL 时钟信号为高电平期间，SDA 数据线上数据必须保持稳定，只要在时钟线上的信号为低电平期间，数据线上的高电平或低电平状态才允许变化。当一个字节按数据位从高位到低位的顺序传输完后，紧接着从机将拉低 SDA 线，回传给主设备一个应答位 ACK，此时才认为一个字节真正的被传输完成，如果一段时间内没有收到从机的应答信号，则自动认为从机已正确接收到数据。</p><p><img src="/../image/I2C_pic/%E5%AE%8C%E6%95%B4%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B.png"></p><h4 id="I2C-总线写通信过程"><a href="#I2C-总线写通信过程" class="headerlink" title="I2C 总线写通信过程"></a>I2C 总线写通信过程</h4><p>（1）主机在检测到总线空闲的情况下，首先发送一个 START 信号掌管总线；</p><p>（2）发送一个地址字节（8bit），其中 bit0~6 位为从机地址（7位寻址方式），存放从机的唯一地址；bit7 位为读&#x2F;写位(R&#x2F;W)，0 表示 Write，主机-&gt;从机，1表示 Read，从机-&gt;主机；</p><p>（3）主机发送地址时，总线上每个从机都会将 7 位地址与自己的地址进行比较，若相同，则将匹配成功，发送应答信号（ACK），确认发送器和接收器；</p><p>（4）主机收到 ACK 后开始发送第一个字节（Command），对应从机中要写入的寄存器；</p><p>（5）从机接收 Command 后，从机发送 ACK；</p><p>（6）主机收到 ACK 后开始发送第一个数据字节：bit0~7（数据由高到低），从机接收数据后，发送应答 ACK；</p><p>（7）继续发送数据，n 帧；</p><p>（8）主控制器发送完全部数据后，发送一个停止位 STOP，结束整个通讯并且释放总线。</p><p><img src="/../image/I2C_pic/%E5%86%99%E9%80%9A%E4%BF%A1%E6%80%BB%E7%BA%BF%E8%BF%87%E7%A8%8B.png"></p><blockquote><p>10 位寻址方式：I2C 总线 10bit 寻址和 7bit 寻址是兼容的，可以在同一总线上同时使用 7bit 和 10bit 地址模式的设备，在进行 10bit 地址传输时，第一字节是一个特殊的保留地址来指示当前传输的是 10bit 地址。</p></blockquote><h4 id="I2C-总线读通信过程"><a href="#I2C-总线读通信过程" class="headerlink" title="I2C 总线读通信过程"></a>I2C 总线读通信过程</h4><p>（1）主机产生 START 信号，随后发送从机地址（7bit）+0（Write）；</p><blockquote><p>方向仍然是写，待接收到从机发送的 ACK 应答后，配对成功。 </p></blockquote><p>（2）主机接收到 ACK 后，发送 8bit 内存地址（Command 对应的从机寄存器地址），从机接收到后，内部寻址并提取数据，返回 ACK；</p><p>（3）主机接收到 ACK 后，重新产生 START 信号，再一次发送从机内存地址（7bit）+1（Read），从机接收到后返回 ACK；</p><blockquote><p>方向设置为读，主机设置为接收模式。</p></blockquote><p>（4）主机接收到 ACK 后，做好接收从机信息的准备，现在即可接收 1bit 的数据。</p><blockquote><p>主机不向从机发送应答信号，接收完毕后直接发起终止信号。</p></blockquote><p>（5）主机接收全部数据后，产生 STOP 信号，终止通信，总线变为空闲状态。</p><p><img src="/../image/I2C_pic/%E8%AF%BB%E9%80%9A%E4%BF%A1%E6%80%BB%E7%BA%BF%E8%BF%87%E7%A8%8B.png"></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.nxp.com.cn/docs/en/user-guide/UM10204.pdf">I2C官方文档下载</a></p><p><a href="https://zhuanlan.zhihu.com/p/362287272">https://zhuanlan.zhihu.com/p/362287272</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>I2C</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>C语言内存</title>
     <link href="/2023/08/23/C%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98/"/>
     <url>/2023/08/23/C%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98/</url>
