@@ -16,22 +16,24 @@
   <meta name="author" content="GeorgyKwe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介数据通信中，数据在线路上的传送方式可以分为单工通信、半双工通信、全双工通信三种。 单工通信单工通信，是指消息只能单方面传输的工作方式，比如遥控、遥测，就是单工通信方式。 单工通信信道是单向信道，发送端和接收端的身份都是固定的，发送端只能发送消息，不能接收消息；接收端只能接收消息，不能发送消息，数据信号只能从一端传送到另一端，即信息流是单方向的。 半双工通信半双工通信，是指数据可以沿着两个方向传">
+    <meta name="description" content="原因计算机内存分了代码段（.text段）、初始化的数据段（.data段）、未初始化的数据段（.bss段）、堆空间（heap）、栈空间（stack）和命令行参数和环境变量区域。 ​程序计数器（Program Counter，简称 PC ）的缺省指向0地址，计算机开机后从程序计数器指向的地址开始执行程序，每执行完一条指令后， 程序计数器自动加1。因此很自然的，代码段从低地址区间开始加载，向高地址区间扩">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单工、半双工、全双工">
-<meta property="og:url" content="http://example.com/2023/08/28/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E3%80%81%E5%85%A8%E5%8F%8C%E5%B7%A5/index.html">
+<meta property="og:title" content="栈的拓展方向">
+<meta property="og:url" content="http://example.com/2023/08/29/%E6%A0%88%E7%9A%84%E6%8B%93%E5%B1%95%E6%96%B9%E5%90%91/index.html">
 <meta property="og:site_name" content="我与我斗争">
-<meta property="og:description" content="简介数据通信中，数据在线路上的传送方式可以分为单工通信、半双工通信、全双工通信三种。 单工通信单工通信，是指消息只能单方面传输的工作方式，比如遥控、遥测，就是单工通信方式。 单工通信信道是单向信道，发送端和接收端的身份都是固定的，发送端只能发送消息，不能接收消息；接收端只能接收消息，不能发送消息，数据信号只能从一端传送到另一端，即信息流是单方向的。 半双工通信半双工通信，是指数据可以沿着两个方向传">
+<meta property="og:description" content="原因计算机内存分了代码段（.text段）、初始化的数据段（.data段）、未初始化的数据段（.bss段）、堆空间（heap）、栈空间（stack）和命令行参数和环境变量区域。 ​程序计数器（Program Counter，简称 PC ）的缺省指向0地址，计算机开机后从程序计数器指向的地址开始执行程序，每执行完一条指令后， 程序计数器自动加1。因此很自然的，代码段从低地址区间开始加载，向高地址区间扩">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-28T12:05:11.000Z">
-<meta property="article:modified_time" content="2023-08-28T12:27:26.352Z">
+<meta property="og:image" content="http://example.com/image/heap-stack.png">
+<meta property="article:published_time" content="2023-08-29T11:13:12.000Z">
+<meta property="article:modified_time" content="2023-08-29T11:21:04.368Z">
 <meta property="article:author" content="GeorgyKwe">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image/heap-stack.png">
   
   
   
-  <title>单工、半双工、全双工 - 我与我斗争</title>
+  <title>栈的拓展方向 - 我与我斗争</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="单工、半双工、全双工"></span>
+            <span id="subtitle" data-typed-text="栈的拓展方向"></span>
           
         </div>
 
@@ -208,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-28 20:05" pubdate>
-          2023年8月28日 晚上
+        <time datetime="2023-08-29 19:13" pubdate>
+          2023年8月29日 晚上
         </time>
       </span>
     
@@ -220,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          810 字
+          1.2k 字
         
       </span>
     
@@ -231,7 +233,7 @@
         
         
         
-          7 分钟
+          10 分钟
         
       </span>
     
@@ -269,30 +271,31 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">单工、半双工、全双工</h1>
+            <h1 style="display: none">栈的拓展方向</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>数据通信中，数据在线路上的传送方式可以分为单工通信、半双工通信、全双工通信三种。</p>
-<h2 id="单工通信"><a href="#单工通信" class="headerlink" title="单工通信"></a>单工通信</h2><p>单工通信，是指消息只能单方面传输的工作方式，比如遥控、遥测，就是单工通信方式。</p>
-<p>单工通信信道是单向信道，发送端和接收端的身份都是固定的，发送端只能发送消息，不能接收消息；接收端只能接收消息，不能发送消息，数据信号只能从一端传送到另一端，即信息流是单方向的。</p>
-<h2 id="半双工通信"><a href="#半双工通信" class="headerlink" title="半双工通信"></a>半双工通信</h2><p>半双工通信，是指数据可以沿着两个方向传送，但同一时刻一个信道只允许单方向传送，因此又称为双向交替通信。若想改变传输方向，需由开关进行切换，比如无线对讲机就是一种半双工设备，同一时间内只允许一方讲话。</p>
-<p>半双工方式要求收发双端都有发送装置和接收装置。由于半双工要频繁变换信道方向，因此效率较低，但可以节约传输线路。适用于终端与终端之间的会话式通信，方向转变通常由软件控制的电子开关来控制。</p>
-<h2 id="全双工通信"><a href="#全双工通信" class="headerlink" title="全双工通信"></a>全双工通信</h2><p>全双工通信，是指通信的双方可以同时发送和接收信息的信息交互方式，比如电话、手机等。</p>
-<p>全双工方式在通信系统的每一端都设置发送器和接收器，因此，能控制数据同时在两个方向上传送。全双工方式无需进行方向的切换，因此，没有切换操作所产生的时间延迟，这对那些不能有时间延误的交互式应用（例如远程监测和控制系统）十分有利。这种方式要求通讯双方均有发送器和接收器，同时，需要2根数据线传送数据信号。（可能还需要控制线和状态线，以及地线）。</p>
-<h2 id="UART、SPI、I2C"><a href="#UART、SPI、I2C" class="headerlink" title="UART、SPI、I2C"></a>UART、SPI、I2C</h2><ul>
-<li>UART：全双工、异步通信</li>
-<li>USRT：全双工、同步通信</li>
-<li>SPI：高速、全双工、同步的通信总线</li>
-<li>I2C：半双工的通信总线</li>
+                <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>计算机内存分了代码段（<code>.text</code>段）、初始化的数据段（<code>.data</code>段）、未初始化的数据段（<code>.bss</code>段）、堆空间（<code>heap</code>）、栈空间（<code>stack</code>）和命令行参数和环境变量区域。</p>
+<p>​程序计数器（Program Counter，简称 PC ）的缺省指向0地址，计算机开机后从程序计数器指向的地址开始执行程序，每执行完一条指令后， 程序计数器自动加1。因此很自然的，代码段从低地址区间开始加载，向高地址区间扩展。</p>
+<p>​heap 从低地址向高地址扩展，做内存管理相对要简单些，为了避免栈空间和代码段冲突，最大利用地址空间，很自然的，我们会选择把栈底设置在高地址区间，然后让栈向下增长。</p>
+<p>这是来自 apue 里一张经典的 C 程序内存分布图，着重看一下 heap 和 stack 的内存分布。</p>
+<p><img src="/../image/heap-stack.png" srcset="/img/loading.gif" lazyload alt="图1"></p>
+<h2 id="栈从高地址向低地址拓展的优点"><a href="#栈从高地址向低地址拓展的优点" class="headerlink" title="栈从高地址向低地址拓展的优点"></a>栈从高地址向低地址拓展的优点</h2><p><strong>stack</strong> 从高地址向低地址扩展，这样栈空间的起始位置就能确定下来。动态的调整栈空间大小也不需要移动栈内的数据，如果是从低地址到高地址的扩展，结尾的地址是固定的，如果要扩大或缩小，则需要移动整个栈的数据。</p>
+<p>并且这样设计可以使得堆和栈能够充分利用空闲的地址空间。如果栈向上涨的话，我们就必须得指定栈和堆的一个严格分界线，但这个分界线怎么确定呢？平均分？但是有的程序使用的堆空间比较多，而有的程序使用的栈空间比较多。</p>
+<p>所以就可能出现这种情况：一个程序因为栈溢出而崩溃的时候，其实它还有大量闲置的堆空间呢，但是我们却无法使用这些闲置的堆空间。所以呢，最好的办法就是让堆和栈一个向上涨，一个向下涨，这样它们就可以最大程度地共用这块剩余的地址空间，达到利用率的最大化！</p>
+<h2 id="现在-CPU-指令集的设计"><a href="#现在-CPU-指令集的设计" class="headerlink" title="现在 CPU 指令集的设计"></a>现在 CPU 指令集的设计</h2><p>大部分 CPU 指令集设计了函数调用架构，定义了专用的调用&#x2F;返回指令，并在指令中隐含规定栈的方向。</p>
+<ul>
+<li>主流1：向低地址扩展：<strong>x86</strong>，<strong>MIPS</strong>；</li>
+<li>主流2：自由选择：<strong>Arm</strong>（但个别指令仅支持向低）；</li>
+<li>罕见：向高地址扩展：<strong>PA-RISC</strong>，操作系统<strong>Multics</strong>；</li>
+<li>非主流：<strong>System z</strong>，栈是个链表[2]。</li>
 </ul>
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ul>
-<li>Half Duplex Communication：半双工通信</li>
-<li>Full Duplex Communication：全双工通信</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chaofanwei/article/details/13274815">https://blog.csdn.net/chaofanwei/article/details/13274815</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39855658">https://www.zhihu.com/question/39855658</a></p>
+<p>如果 CPU 同时支持向上和向下，例如 Arm，那么编译器需要指定程序的调用方向，一般还是选择向下。比较罕见的极端的案例是 Multics 操作系统，这是 Unix 的巨无霸前身，设计者刻意选用向高地址扩展，因为该架构有助于防御缓冲区溢出攻击[3]。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>[1] What is the logical explanation for stacks typically growing downward and heaps growing upward?</p>
+<p>[2] 列出了8种架构的栈增长方向 What is the direction of stack growth in most modern systems?</p>
+<p>[3] 罕见的栈增长方向 Why does the stack grow downward?</p>
+<p>[4]<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/54ac15839abf">https://www.jianshu.com/p/54ac15839abf</a></p>
 
                 
               </div>
@@ -311,7 +314,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1/" class="category-chain-item">数据通信</a>
+  <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="category-chain-item">C语言</a>
   
   
 
@@ -338,8 +341,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>单工、半双工、全双工</div>
-      <div>http://example.com/2023/08/28/单工、半双工、全双工/</div>
+      <div>栈的拓展方向</div>
+      <div>http://example.com/2023/08/29/栈的拓展方向/</div>
     </div>
     <div class="license-meta">
       
@@ -351,7 +354,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月28日</div>
+          <div>2023年8月29日</div>
         </div>
       
       
@@ -383,18 +386,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/29/%E6%A0%88%E7%9A%84%E6%8B%93%E5%B1%95%E6%96%B9%E5%90%91/" title="栈的拓展方向">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">栈的拓展方向</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/28/I2C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" title="I2C通信协议">
-                        <span class="hidden-mobile">I2C通信协议</span>
+                      <a href="/2023/08/28/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E3%80%81%E5%85%A8%E5%8F%8C%E5%B7%A5/" title="单工、半双工、全双工">
+                        <span class="hidden-mobile">单工、半双工、全双工</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

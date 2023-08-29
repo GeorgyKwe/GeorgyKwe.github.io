@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>栈的拓展方向</title>
+    <link href="/2023/08/29/%E6%A0%88%E7%9A%84%E6%8B%93%E5%B1%95%E6%96%B9%E5%90%91/"/>
+    <url>/2023/08/29/%E6%A0%88%E7%9A%84%E6%8B%93%E5%B1%95%E6%96%B9%E5%90%91/</url>
+    
+    <content type="html"><![CDATA[<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>计算机内存分了代码段（<code>.text</code>段）、初始化的数据段（<code>.data</code>段）、未初始化的数据段（<code>.bss</code>段）、堆空间（<code>heap</code>）、栈空间（<code>stack</code>）和命令行参数和环境变量区域。</p><p>​程序计数器（Program Counter，简称 PC ）的缺省指向0地址，计算机开机后从程序计数器指向的地址开始执行程序，每执行完一条指令后， 程序计数器自动加1。因此很自然的，代码段从低地址区间开始加载，向高地址区间扩展。</p><p>​heap 从低地址向高地址扩展，做内存管理相对要简单些，为了避免栈空间和代码段冲突，最大利用地址空间，很自然的，我们会选择把栈底设置在高地址区间，然后让栈向下增长。</p><p>这是来自 apue 里一张经典的 C 程序内存分布图，着重看一下 heap 和 stack 的内存分布。</p><p><img src="/../image/heap-stack.png" alt="图1"></p><h2 id="栈从高地址向低地址拓展的优点"><a href="#栈从高地址向低地址拓展的优点" class="headerlink" title="栈从高地址向低地址拓展的优点"></a>栈从高地址向低地址拓展的优点</h2><p><strong>stack</strong> 从高地址向低地址扩展，这样栈空间的起始位置就能确定下来。动态的调整栈空间大小也不需要移动栈内的数据，如果是从低地址到高地址的扩展，结尾的地址是固定的，如果要扩大或缩小，则需要移动整个栈的数据。</p><p>并且这样设计可以使得堆和栈能够充分利用空闲的地址空间。如果栈向上涨的话，我们就必须得指定栈和堆的一个严格分界线，但这个分界线怎么确定呢？平均分？但是有的程序使用的堆空间比较多，而有的程序使用的栈空间比较多。</p><p>所以就可能出现这种情况：一个程序因为栈溢出而崩溃的时候，其实它还有大量闲置的堆空间呢，但是我们却无法使用这些闲置的堆空间。所以呢，最好的办法就是让堆和栈一个向上涨，一个向下涨，这样它们就可以最大程度地共用这块剩余的地址空间，达到利用率的最大化！</p><h2 id="现在-CPU-指令集的设计"><a href="#现在-CPU-指令集的设计" class="headerlink" title="现在 CPU 指令集的设计"></a>现在 CPU 指令集的设计</h2><p>大部分 CPU 指令集设计了函数调用架构，定义了专用的调用&#x2F;返回指令，并在指令中隐含规定栈的方向。</p><ul><li>主流1：向低地址扩展：<strong>x86</strong>，<strong>MIPS</strong>；</li><li>主流2：自由选择：<strong>Arm</strong>（但个别指令仅支持向低）；</li><li>罕见：向高地址扩展：<strong>PA-RISC</strong>，操作系统<strong>Multics</strong>；</li><li>非主流：<strong>System z</strong>，栈是个链表[2]。</li></ul><p>如果 CPU 同时支持向上和向下，例如 Arm，那么编译器需要指定程序的调用方向，一般还是选择向下。比较罕见的极端的案例是 Multics 操作系统，这是 Unix 的巨无霸前身，设计者刻意选用向高地址扩展，因为该架构有助于防御缓冲区溢出攻击[3]。</p><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>[1] What is the logical explanation for stacks typically growing downward and heaps growing upward?</p><p>[2] 列出了8种架构的栈增长方向 What is the direction of stack growth in most modern systems?</p><p>[3] 罕见的栈增长方向 Why does the stack grow downward?</p><p>[4]<a href="https://www.jianshu.com/p/54ac15839abf">https://www.jianshu.com/p/54ac15839abf</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C语言</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>单工、半双工、全双工</title>
     <link href="/2023/08/28/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E3%80%81%E5%85%A8%E5%8F%8C%E5%B7%A5/"/>
     <url>/2023/08/28/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E3%80%81%E5%85%A8%E5%8F%8C%E5%B7%A5/</url>
