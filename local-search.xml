@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Uart通信协议</title>
+    <link href="/2023/09/06/Uart%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"/>
+    <url>/2023/09/06/Uart%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/</url>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通信协议在组织设备之间的通信时扮演着重要角色，基于系统要求而以不同方式进行设计。此类协议具有特定的规则，为实现成功通信，不同设备都遵循该规则。Uart(Universel asynchous receiver&#x2F;transmitter)：通用异步接收器&#x2F;发送器，是最常用的设备间通信协议之一。在嵌入式系统、微控制器和计算机大多将 Uart 作为设备间硬件通信协议的一种形式。在可用通信协议中，Uart 的发送和接收端仅使用两条线。尽管 Uart 是一种广泛使用的硬件通信方法，但它并非在所有时候都是完全优化的，如在微控制器内部使用 Uart 模块时，通常会忽略帧协议的适当实现。</p><p>根据定义，Uart 是一种硬件通信协议，以可配置的速度使用异步串行通信。异步意味着没有时钟信号来同步从发送设备进入接收端的输出位。</p><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p><img src="/../image/Uart_pic/Uart%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3.svg" alt="图1 两个Uart彼此直接通信"></p><p>每个 Uart 设备的两个信号分别命名为：</p><ul><li>发送器（Tx）;</li><li>接收器（Rx）;</li></ul><p>每个设备的发送器和接收器的主要作用是用于串行通信的串行数据的发送和接收。</p><p><img src="/../image/Uart_pic/%E5%B8%A6%E6%95%B0%E6%8D%AE%E6%80%BB%E7%BA%BF%E7%9A%84UART.svg" alt="图2 带数据总线的UART"></p><p>发送到 Uart 数据会先以并行形式发送到控制数据总线上，然后数据将在传输导线上一位一位的串行传输到接收 Uart 上，反过来，对于接收设备，串行数据会被转换为并行数据。</p><p>Uart 设备具有专门用于发送或接收的发送和接收引脚。Uart 线用作发送和接收数据的通信介质。</p><p>对于 Uart 和大多数串行通信，发送和接收设备需要将波特率设置为相同的值。波特率是指信息传输到信道的速率。对于串行端口，设定的波特率将用作每秒传输的最大位数。</p><table><thead><tr><th align="center">特征</th><th align="center">说明</th></tr></thead><tbody><tr><td align="center">波特率</td><td align="center">9600、19200、38400、57600、115200、230400、460800、921600、1000000、1500000</td></tr><tr><td align="center">传输方法</td><td align="center">异步</td></tr><tr><td align="center">最大主机数</td><td align="center">1</td></tr><tr><td align="center">最大从机数</td><td align="center">1</td></tr><tr><td align="center"></td><td align="center"></td></tr></tbody></table><p>Uart 接口不使用时钟信号来同步接收和发送设备，而是以异步方式传输数据。发送器根据其时钟信号生成的位流取代了时钟信号，接收器使用其内部时钟信号对输入数据进行采样。同步点是通过两个设备的相同波特率来管理。如果波特率不同，发送和接收数据的时序可能会受影响，导致数据处理过程出现不一致。允许的波特率差异最大值为10%，超过此值，位的时序就会脱节。</p><h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>在 Uart 中，传输模式为数据包形式。连接发送器和接收器的机制包括串行数据包的创建和物理硬件线路的控制。数据包由起始位、数据帧、奇偶校验位和停止位组成。</p><p><img src="/../image/Uart_pic/UART%E6%95%B0%E6%8D%AE%E5%8C%85.svg" alt="图3 UART数据包"></p><p><strong>起始位</strong></p><p>当数据未传输时，Uart 数据总线通常保持高电平。若要开始数据传输，发送 Uart 会将数据总线从高电平拉到低电平并保持一个时钟周期。当接收 Uart 检测到由高到低电压跃迁时，便开始以波特率对应的频率读取数据帧中的位。</p><p><img src="/../image/Uart_pic/%E8%B5%B7%E5%A7%8B%E4%BD%8D.jpg" alt="图4 起始位"></p><p><strong>数据帧</strong></p><p>数据帧包含传输的实际数据。如果使用奇偶校验位，数据帧长度可以是5位到8位。如果不使用奇偶校验位，数据帧长度可以是9位。在大多数情况下，数据以最低有效位优先方式发送。</p><p><img src="/../image/Uart_pic/%E6%95%B0%E6%8D%AE%E5%B8%A7.jpg" alt="图5 数据帧"></p><p><strong>奇偶校验位</strong></p><p>奇偶性描述数字是偶数还是奇数。通过奇偶校验位，接收 Uart 判断传输期间是否有数据发生改变。电磁辐射、不一致的波特率或长距离数据传输都有可能改变数据位。</p><p>接收 Uart 读取数据帧后，将计数值为1的位，检查总数是偶数还是奇数。如果奇偶校验位为0（偶数奇偶校验），则数据帧中1或逻辑高位应为偶数。如果奇偶校验位为1（奇数奇偶校验），则数据帧中1或逻辑高位应为奇数。</p><p>当奇偶检验位与数据匹配时，Uart 认为传输未出错。但是，若奇偶校验位为0，而总和为奇数，或者奇偶校验位为1，而总和为偶数，则 Uart 认为数据帧中的位已改变。</p><p><img src="/../image/Uart_pic/%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C%E4%BD%8D.jpg" alt="图6 奇偶校验位"></p><p><strong>停止位</strong></p><p>为了表示数据包传输结束，发送 Uart 将数据总线从低电压拉到高电压并保持1到2位时间。</p><p><img src="/../image/Uart_pic/%E5%81%9C%E6%AD%A2%E4%BD%8D.jpg" alt="图7 停止位"></p><h2 id="Uart-传输步骤"><a href="#Uart-传输步骤" class="headerlink" title="Uart 传输步骤"></a>Uart 传输步骤</h2><p>第一步：发送 Uart 从数据总线并行接收数据。</p><p><img src="/../image/Uart_pic/%E6%95%B0%E6%8D%AE%E6%80%BB%E7%BA%BF%E8%87%B3%E5%8F%91%E9%80%81UART.svg" alt="图8 数据总线至发送UART"></p><p>第二步：发送 Uart 将起始位、奇偶校验位和停止位添加到数据帧。</p><p><img src="/../image/Uart_pic/Tx%E4%BE%A7%E7%9A%84UART%E6%95%B0%E6%8D%AE%E5%B8%A7.svg" alt="图9 Tx侧的UART数据帧"></p><p>第三步：从起始位到结束位，整个数据包以串行方式从发送 Uart 送至接收 Uart，接收 Uart 以预配置的波特率对数据进行采样。</p><p><img src="/../image/Uart_pic/UART%E4%BC%A0%E8%BE%93.svg" alt="图10 UART传输"></p><p>第四步：接收 Uart 丢弃数据帧中的起始位、奇偶校验位和停止位。</p><p><img src="/../image/Uart_pic/Rx%E4%BE%A7%E7%9A%84UART%E6%95%B0%E6%8D%AE%E5%B8%A7.svg" alt="图11 Rx侧的UART数据帧"></p><p>第五步：接收 Uart 将串行数据转换回并行数据，并将其传输到接收端的数据总线。</p><p><img src="/../image/Uart_pic/%E6%8E%A5%E6%94%B6UART%E8%87%B3%E6%95%B0%E6%8D%AE%E6%80%BB%E7%BA%BF.svg" alt="图12 接收UART至数据总线"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Uart</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>栈的拓展方向</title>
     <link href="/2023/08/29/%E6%A0%88%E7%9A%84%E6%8B%93%E5%B1%95%E6%96%B9%E5%90%91/"/>
     <url>/2023/08/29/%E6%A0%88%E7%9A%84%E6%8B%93%E5%B1%95%E6%96%B9%E5%90%91/</url>
