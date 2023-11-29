@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="GeorgyKwe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 环境搭建1.1 objdump 安装 objdump 是 binutils 下的工具，需要下载 binutils 包。 下载地址      进入解压后文件所在的那个目录下，执行下列命令  123$.&#x2F;configure$make$sudo make install  1.2 架构环境安装bootrom &gt;&gt; toolchain &gt;&gt; bin 12345&#x2F;* 架构安装 *">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编与反汇编">
+<meta property="og:url" content="http://example.com/2023/09/18/%E6%B1%87%E7%BC%96%E4%B8%8E%E5%8F%8D%E6%B1%87%E7%BC%96/index.html">
+<meta property="og:site_name" content="我与我斗争">
+<meta property="og:description" content="1 环境搭建1.1 objdump 安装 objdump 是 binutils 下的工具，需要下载 binutils 包。 下载地址      进入解压后文件所在的那个目录下，执行下列命令  123$.&#x2F;configure$make$sudo make install  1.2 架构环境安装bootrom &gt;&gt; toolchain &gt;&gt; bin 12345&#x2F;* 架构安装 *">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/Assembly_pic/binutils%E4%B8%8B%E8%BD%BD%E7%89%88%E6%9C%AC.png">
+<meta property="og:image" content="http://example.com/image/Assembly_pic/%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B.png">
+<meta property="article:published_time" content="2023-09-18T01:21:38.000Z">
+<meta property="article:modified_time" content="2023-09-18T09:50:07.684Z">
+<meta property="article:author" content="GeorgyKwe">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image/Assembly_pic/binutils%E4%B8%8B%E8%BD%BD%E7%89%88%E6%9C%AC.png">
+  
+  
+  
+  <title>汇编与反汇编 - 我与我斗争</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>我与我斗争</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="汇编与反汇编"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-18 09:21" pubdate>
+          2023年9月18日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">汇编与反汇编</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1 环境搭建"></a>1 环境搭建</h2><h3 id="1-1-objdump-安装"><a href="#1-1-objdump-安装" class="headerlink" title="1.1 objdump 安装"></a>1.1 objdump 安装</h3><ul>
+<li><strong>objdump</strong> 是 <strong>binutils</strong> 下的工具，需要下载 <strong>binutils</strong> 包。<ul>
+<li>下载<a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/binutils/">地址</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="/../image/Assembly_pic/binutils%E4%B8%8B%E8%BD%BD%E7%89%88%E6%9C%AC.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>进入解压后文件所在的那个目录下，执行下列命令</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">$./configure<br>$make<br>$sudo make install<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-2-架构环境安装"><a href="#1-2-架构环境安装" class="headerlink" title="1.2 架构环境安装"></a>1.2 架构环境安装</h3><p><strong>bootrom &gt;&gt; toolchain &gt;&gt; bin</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* 架构安装 */</span><br>$sudo apt install binutils-riscv64-unknown-elf<br>  <br><span class="hljs-comment">/* 生成反汇编文件 */</span><br>$riscv64-unknown-elf-objdump -d btr.elf &gt; test<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-汇编和反汇编"><a href="#2-汇编和反汇编" class="headerlink" title="2 汇编和反汇编"></a>2 汇编和反汇编</h2><h3 id="2-1-区别"><a href="#2-1-区别" class="headerlink" title="2.1 区别"></a>2.1 区别</h3><ul>
+<li>C 程序变成可执行程序的过程。</li>
+</ul>
+<p><img src="/../image/Assembly_pic/%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2-2-汇编"><a href="#2-2-汇编" class="headerlink" title="2.2 汇编"></a>2.2 汇编</h3><ul>
+<li>动词，指的是把 <strong>汇编语言</strong> 翻译成 <strong>机器语言</strong> 的过程。</li>
+<li>名词，指的便是汇编语言。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 操作：寄存器BX的内容送到AX中</span><br><span class="hljs-number">1000100111011000</span>              机器指令<br>mov ax,bx                     汇编指令<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* 以test.c为例 */</span><br>$gcc -O -S test.c				<span class="hljs-comment">/* 生成test.s文件 */</span><br>$gcc -O -S test.c  vim test.c	<span class="hljs-comment">/* 使用 vim 编辑器打开 .s 文件 */</span>    <br></code></pre></td></tr></table></figure>
+
+<h3 id="2-3-反汇编"><a href="#2-3-反汇编" class="headerlink" title="2.3 反汇编"></a>2.3 反汇编</h3><ul>
+<li>动词，指的是由已生成的 <strong>机器语言（二进制语言）</strong> 转化为 <strong>汇编语言</strong> 的过程，也可以说是汇编的逆向过程。</li>
+<li>名词，指的是由 <strong>机器语言</strong> 经过 <strong>反汇编过程</strong> 生成的 <strong>汇编语言</strong>。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* 生成反汇编文件 */</span><br>$objdump -d test.o<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-汇编语言书写规则"><a href="#3-汇编语言书写规则" class="headerlink" title="3 汇编语言书写规则"></a>3 汇编语言书写规则</h2><ul>
+<li><strong>8086</strong> 采用 <strong>intel</strong> 汇编，<strong>i386</strong> 采用 <strong>AT&amp;T</strong> 汇编，二者有显著不同，不要搞混。</li>
+</ul>
+<h3 id="3-1-大小写"><a href="#3-1-大小写" class="headerlink" title="3.1 大小写"></a>3.1 大小写</h3><ul>
+<li><strong>INTEL</strong> 格式的指令使用大写字母，而 <strong>AT&amp;T</strong> 格式的使用小写字母。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	<br>	MOV EAX,EBX<br><br><span class="hljs-comment">/* AT&amp;T */</span><br>	movl %ebx,%eax<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-2-操作数赋值方向"><a href="#3-2-操作数赋值方向" class="headerlink" title="3.2 操作数赋值方向"></a>3.2 操作数赋值方向</h3><ul>
+<li><p>在 <strong>INTEL</strong> 语法中，第一个表示目的操作数，第二个表示源操作数，赋值方向从右向左。</p>
+</li>
+<li><p><strong>AT&amp;T</strong> 语法第一个为源操作数，第二个为目的操作数，方向从左到右，合乎自然。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	<br>	MOV EAX,EBX<br>    <br><span class="hljs-comment">/* AT&amp;T */</span><br>	movl %ebx,%eax<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-3-前缀"><a href="#3-3-前缀" class="headerlink" title="3.3 前缀"></a>3.3 前缀</h3><ul>
+<li><p><strong>INTEL</strong> 中寄存器和立即数不需要前缀</p>
+</li>
+<li><p>**AT&amp;T **中寄存器需要加前缀 <strong>“%”<strong>，</strong>立即数</strong> 需要加前缀 <strong>“$”</strong></p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	<br>	MOV EAX,<span class="hljs-number">1</span><br><br><span class="hljs-comment">/* AT&amp;T */</span><br>	movl $<span class="hljs-number">1</span>,%eax<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>符号常数直接引用，不需要加前缀；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">movl value,%ebx    <span class="hljs-comment">/* value为常数 */</span>；<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在符号前加前缀 <strong>$</strong> 表示引用符号地址；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">movl $value        <span class="hljs-comment">/* %ebx，是将 value 的地址放到 ebx 中 */</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>总线锁定前缀 **”lock”**：总线锁定操作</li>
+<li><strong>“lock”</strong> 前缀在 <strong>Linux</strong> 核心代码中使用很多，特别是 <strong>SMP</strong> 代码中。当总线锁定后其它 <strong>CPU</strong> 不能存取锁定地址处的内存单元</li>
+<li>远程跳转指令和子过程调用指令的操作码使用前缀 <strong>“l”<strong>，分别为 <strong>ljmp</strong>，</strong>lcall</strong>，与之相应的返回指令伪 <strong>lret</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	<br>	 CALL FARSECTION:OFFSET<br>	 JMP FARSECTION:OFFSET<br>	 RET FARSATCK_ADJUST<br><br><span class="hljs-comment">/* AT&amp;T */</span><br>	 call secion:secion:secion:offset<br>	 jmp secion:secion:secion:offset<br>	 ret $stack_adjust<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-4-间接寻址语法"><a href="#3-4-间接寻址语法" class="headerlink" title="3.4 间接寻址语法"></a>3.4 间接寻址语法</h3><ul>
+<li><strong>INTEL</strong> 中基地址使用 **”[“<strong>、</strong>“]”**，而在 <strong>AT&amp;T</strong> 中使用 **”(“<strong>、</strong>“)”**，另外处理复杂操作数的语法也不同</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	 <br>	Segreg:[base+indexscale+disp]，<br><br><span class="hljs-comment">/* AT&amp;T */</span>  <br>	%segreg:disp(base,index,sale)，<br><br><span class="hljs-comment">/* 其中 segreg，index，scale，disp 都是可选的，在指定 index 而没有显式指定 Scale 的情况下使用默认值 1 */</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>**Scale **和 <strong>disp</strong> 不需要加前缀 <strong>“&amp;”</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	 <br>	Instr<br>	foo,segreg:[base+index*scale+disp]<br><br><span class="hljs-comment">/* AT&amp;T */</span>  <br>	instr<br>	%segreg:disp(base,index,scale),foo<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-5-后缀"><a href="#3-5-后缀" class="headerlink" title="3.5 后缀"></a>3.5 后缀</h3><ul>
+<li><p><strong>AT&amp;T</strong> 语法中大部分指令操作码的最后一个字母表示操作数大小</p>
+<ul>
+<li><strong>“b”</strong> 表示 <strong>byte</strong>（一个字节）、**”w”** 表示 <strong>word</strong>（2个字节）、**’’l’’** 表示 <strong>long</strong>（4个字节）</li>
+</ul>
+</li>
+<li><p>**INTEL **中处理内存操作数时也有类似的语法</p>
+<ul>
+<li><strong>BYTE PTR</strong>、<strong>WORD PTR</strong>、<strong>DWORDPTR</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	                        <br>	mov al,bl                     <br>	movax,bx                      <br>	mov eax,dword ptr [ebx]       <br>        <br><span class="hljs-comment">/* AT&amp;T */</span><br>    movb %bl,%al<br>    movw %bx,%ax<br>    <span class="hljs-title function_">movl</span> <span class="hljs-params">(%ebx)</span>, %eax<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在 <strong>AT&amp;T</strong> 汇编指令中，操作数扩展指令有两个后缀，一个指定源操作数的字长，另一个指定目标操作数的字长</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	<br>	movsx		<span class="hljs-comment">/* 符号扩展指令 */</span><br>	movzx		<span class="hljs-comment">/*  零扩展指令 */</span><br><br><span class="hljs-comment">/* AT&amp;T */</span><br>	movs		<span class="hljs-comment">/* 符号扩展指令 */</span><br>	movz		<span class="hljs-comment">/* 零扩展指令 */</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">movsbl %al,%edx   <span class="hljs-comment">/* 表示对寄存器 al 中的字节数据进行字节到长字的符号扩展，计算结果存放在寄存器 edx 中 */</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>下面是一些允许的操作数扩展后缀</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">bl 		<span class="hljs-comment">/* 字节-&gt;长字 */</span><br>bw		<span class="hljs-comment">/* 字节-&gt;字 */</span><br>wl		<span class="hljs-comment">/* 字-&gt;长字 */</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>跳转指令标号后的后缀表示跳转方向，**”f”** 表示向前（<strong>forward</strong>），**’’b’’** 表示向后（<strong>back</strong>）。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">jmp1f  	<span class="hljs-comment">/* 向前跳转 1 字节 */</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="4-常见汇编命令"><a href="#4-常见汇编命令" class="headerlink" title="4 常见汇编命令"></a>4 常见汇编命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Assembly">mov  : 将源操作数复制到目的操作数(move)<br>cmpl : 比较两个操作数大小(compare)，它有两个操作数，比如 cmp S2，S1，最终会基于 S1-S2 的值去设置条件码寄存器的值。而对于 test 来说是类似的，对于 test S2，S1 来说，它将基于 S1&amp;S2 去设置条件码寄存器的值。另外需要一提的是，两者都需要加数据格式后缀，比如 b、w、l 这些后缀。<br><br>/*<br> * CF：进位标志寄存器，它记录无符号操作的溢出，当溢出时会被设为1。<br> * ZF：零标志寄存器，当计算结果为0时将会被设为1。<br> * SF：符号标志寄存器，当计算结果为负数时会被设为1。<br> * OF：溢出标志寄存器，当计算结果导致了补码溢出时，会被设为1。<br> * ZF 和 SF 可以判断结果的符号，而CF和OF可以判断无符号和补码的溢出<br>**/<br><br>jmp  : 无条件跳转指令(jump)<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Assembly/" class="category-chain-item">Assembly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>汇编与反汇编</div>
+      <div>http://example.com/2023/09/18/汇编与反汇编/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>GeorgyKwe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/28/Dockerfile%E7%BC%96%E5%86%99/" title="Dockerfile编写">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Dockerfile编写</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/06/Uart%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" title="Uart通信协议">
+                        <span class="hidden-mobile">Uart通信协议</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+    
+      
+            
+                  
+                      <span id="busuanzi_container_site_uv">
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+                      </span>
+</div>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
