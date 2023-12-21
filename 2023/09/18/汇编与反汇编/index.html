@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/image/Assembly_pic/binutils%E4%B8%8B%E8%BD%BD%E7%89%88%E6%9C%AC.png">
 <meta property="og:image" content="http://example.com/image/Assembly_pic/%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B.png">
 <meta property="article:published_time" content="2023-09-18T01:21:38.000Z">
-<meta property="article:modified_time" content="2023-09-18T09:50:07.684Z">
+<meta property="article:modified_time" content="2023-11-29T06:49:53.375Z">
 <meta property="article:author" content="GeorgyKwe">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.6k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          23 分钟
+          22 分钟
         
       </span>
     
@@ -302,7 +302,7 @@
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 操作：寄存器BX的内容送到AX中</span><br><span class="hljs-number">1000100111011000</span>              机器指令<br>mov ax,bx                     汇编指令<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* 以test.c为例 */</span><br>$gcc -O -S test.c				<span class="hljs-comment">/* 生成test.s文件 */</span><br>$gcc -O -S test.c  vim test.c	<span class="hljs-comment">/* 使用 vim 编辑器打开 .s 文件 */</span>    <br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* 以test.c为例 */</span><br>$gcc -O -S test.c				<span class="hljs-comment">/* 生成test.s文件 */</span><br>$gcc -O -S test.c  vim test.c	<span class="hljs-comment">/* 使用 vim 编辑器打开 .s 文件 */</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="2-3-反汇编"><a href="#2-3-反汇编" class="headerlink" title="2.3 反汇编"></a>2.3 反汇编</h3><ul>
 <li>动词，指的是由已生成的 <strong>机器语言（二进制语言）</strong> 转化为 <strong>汇编语言</strong> 的过程，也可以说是汇编的逆向过程。</li>
@@ -329,7 +329,7 @@
 <h3 id="3-3-前缀"><a href="#3-3-前缀" class="headerlink" title="3.3 前缀"></a>3.3 前缀</h3><ul>
 <li><p><strong>INTEL</strong> 中寄存器和立即数不需要前缀</p>
 </li>
-<li><p>**AT&amp;T **中寄存器需要加前缀 <strong>“%”<strong>，</strong>立即数</strong> 需要加前缀 <strong>“$”</strong></p>
+<li><p><strong>AT&amp;T</strong> 中寄存器需要加前缀 <strong>%<strong>，</strong>立即数</strong> 需要加前缀 <strong>$</strong></p>
 </li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	<br>	MOV EAX,<span class="hljs-number">1</span><br><br><span class="hljs-comment">/* AT&amp;T */</span><br>	movl $<span class="hljs-number">1</span>,%eax<br></code></pre></td></tr></table></figure>
@@ -345,35 +345,35 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">movl $value        <span class="hljs-comment">/* %ebx，是将 value 的地址放到 ebx 中 */</span><br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>总线锁定前缀 **”lock”**：总线锁定操作</li>
+<li>总线锁定前缀 <strong>lock</strong>：总线锁定操作</li>
 <li><strong>“lock”</strong> 前缀在 <strong>Linux</strong> 核心代码中使用很多，特别是 <strong>SMP</strong> 代码中。当总线锁定后其它 <strong>CPU</strong> 不能存取锁定地址处的内存单元</li>
-<li>远程跳转指令和子过程调用指令的操作码使用前缀 <strong>“l”<strong>，分别为 <strong>ljmp</strong>，</strong>lcall</strong>，与之相应的返回指令伪 <strong>lret</strong></li>
+<li>远程跳转指令和子过程调用指令的操作码使用前缀 <strong>l</strong>，分别为 <strong>ljmp</strong>，<strong>lcall</strong>，与之相应的返回指令伪 <strong>lret</strong></li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	<br>	 CALL FARSECTION:OFFSET<br>	 JMP FARSECTION:OFFSET<br>	 RET FARSATCK_ADJUST<br><br><span class="hljs-comment">/* AT&amp;T */</span><br>	 call secion:secion:secion:offset<br>	 jmp secion:secion:secion:offset<br>	 ret $stack_adjust<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-4-间接寻址语法"><a href="#3-4-间接寻址语法" class="headerlink" title="3.4 间接寻址语法"></a>3.4 间接寻址语法</h3><ul>
-<li><strong>INTEL</strong> 中基地址使用 **”[“<strong>、</strong>“]”**，而在 <strong>AT&amp;T</strong> 中使用 **”(“<strong>、</strong>“)”**，另外处理复杂操作数的语法也不同</li>
+<li><strong>INTEL</strong> 中基地址使用 **[<strong>、</strong>]**，而在 <strong>AT&amp;T</strong> 中使用 **(<strong>、</strong>)**，另外处理复杂操作数的语法也不同</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	 <br>	Segreg:[base+indexscale+disp]，<br><br><span class="hljs-comment">/* AT&amp;T */</span>  <br>	%segreg:disp(base,index,sale)，<br><br><span class="hljs-comment">/* 其中 segreg，index，scale，disp 都是可选的，在指定 index 而没有显式指定 Scale 的情况下使用默认值 1 */</span><br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>**Scale **和 <strong>disp</strong> 不需要加前缀 <strong>“&amp;”</strong></li>
+<li><strong>Scale</strong> 和 <strong>disp</strong> 不需要加前缀 <strong>“&amp;”</strong></li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	 <br>	Instr<br>	foo,segreg:[base+index*scale+disp]<br><br><span class="hljs-comment">/* AT&amp;T */</span>  <br>	instr<br>	%segreg:disp(base,index,scale),foo<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span><br>	Instr<br>	foo,segreg:[base+index*scale+disp]<br><br><span class="hljs-comment">/* AT&amp;T */</span><br>	instr<br>	%segreg:disp(base,index,scale),foo<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-5-后缀"><a href="#3-5-后缀" class="headerlink" title="3.5 后缀"></a>3.5 后缀</h3><ul>
 <li><p><strong>AT&amp;T</strong> 语法中大部分指令操作码的最后一个字母表示操作数大小</p>
 <ul>
-<li><strong>“b”</strong> 表示 <strong>byte</strong>（一个字节）、**”w”** 表示 <strong>word</strong>（2个字节）、**’’l’’** 表示 <strong>long</strong>（4个字节）</li>
+<li><strong>b</strong> 表示 <strong>byte</strong>（一个字节）、<strong>w</strong> 表示 <strong>word</strong>（2个字节）、<strong>l</strong> 表示 <strong>long</strong>（4个字节）</li>
 </ul>
 </li>
-<li><p>**INTEL **中处理内存操作数时也有类似的语法</p>
+<li><p><strong>INTEL</strong>中处理内存操作数时也有类似的语法</p>
 <ul>
 <li><strong>BYTE PTR</strong>、<strong>WORD PTR</strong>、<strong>DWORDPTR</strong></li>
 </ul>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span>	                        <br>	mov al,bl                     <br>	movax,bx                      <br>	mov eax,dword ptr [ebx]       <br>        <br><span class="hljs-comment">/* AT&amp;T */</span><br>    movb %bl,%al<br>    movw %bx,%ax<br>    <span class="hljs-title function_">movl</span> <span class="hljs-params">(%ebx)</span>, %eax<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* INTEL */</span><br>	mov al,bl<br>	movax,bx<br>	mov eax,dword ptr [ebx]<br><br><span class="hljs-comment">/* AT&amp;T */</span><br>    movb %bl,%al<br>    movw %bx,%ax<br>    <span class="hljs-title function_">movl</span> <span class="hljs-params">(%ebx)</span>, %eax<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>在 <strong>AT&amp;T</strong> 汇编指令中，操作数扩展指令有两个后缀，一个指定源操作数的字长，另一个指定目标操作数的字长</li>
@@ -385,7 +385,7 @@
 <ul>
 <li>下面是一些允许的操作数扩展后缀</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">bl 		<span class="hljs-comment">/* 字节-&gt;长字 */</span><br>bw		<span class="hljs-comment">/* 字节-&gt;字 */</span><br>wl		<span class="hljs-comment">/* 字-&gt;长字 */</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">bl		<span class="hljs-comment">/* 字节-&gt;长字 */</span><br>bw		<span class="hljs-comment">/* 字节-&gt;字 */</span><br>wl		<span class="hljs-comment">/* 字-&gt;长字 */</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>跳转指令标号后的后缀表示跳转方向，**”f”** 表示向前（<strong>forward</strong>），**’’b’’** 表示向后（<strong>back</strong>）。</li>
 </ul>
